@@ -3,6 +3,7 @@ package example.smyy.plantcare.ui.plantlist
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import example.smyy.plantcare.R
 import example.smyy.plantcare.data.model.db.Plant
 import kotlinx.android.synthetic.main.activity_plant_list.*
@@ -17,7 +18,7 @@ class PlantListActivity : AppCompatActivity() {
 
         addPlant()
 
-        rvPlants.layoutManager = LinearLayoutManager(this)
+        rvPlants.layoutManager = LinearLayoutManager(this) as RecyclerView.LayoutManager?
         rvPlants.adapter = PlantAdapter(plantList, this)
 
     }

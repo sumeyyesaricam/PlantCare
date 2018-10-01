@@ -12,12 +12,8 @@ import kotlinx.android.synthetic.main.item_plant.view.*
 
 class PlantAdapter(val items : ArrayList<Plant>, val context: Context) : RecyclerView.Adapter<ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val plantid = getItemId(position).toString()
-        val plant=items.find { x->x.plantId==plantid }
-        holder.apply {
-            bind(createOnClickListener(plant!!.plantId), plant)
-            itemView.tag = plant
-        }
+        holder.bind(createOnClickListener(items[position].plantId),items[position])
+
     }
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
