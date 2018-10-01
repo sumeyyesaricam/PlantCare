@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PlantCare</string>
+    <string name="create_alarm">ALARM OLUŞTUR</string>
 </resources>
