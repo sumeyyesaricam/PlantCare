@@ -43,7 +43,7 @@ class PlantListActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
     fun addPlant() {
-        plantList.add(Plant("1", "kıvırcık", "asdfghj", 4,
+        plantList.add(Plant("1", "kıvırcık", "deneme", 4,
                 "", 3, 5, 5))
 
         plantList.add(Plant("2", "kaktüs", "asdfghj", 4,

@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">PlantCare</string>
     <string name="create_alarm">ALARM OLUŞTUR</string>
+
+    <string-array name="array_day">
+        <item>1 Günde</item>
+        <item>2 Günde</item>
+        <item>3 Günde</item>
+    </string-array>
 </resources>
