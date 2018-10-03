@@ -22,7 +22,7 @@ class PlantListActivity : AppCompatActivity() {
 
         addPlant()
 
-        rvPlants.layoutManager = LinearLayoutManager(this) as RecyclerView.LayoutManager?
+        rvPlants.layoutManager = LinearLayoutManager(this)
         rvPlants.adapter = PlantAdapter(plantList, this)
 
     }
