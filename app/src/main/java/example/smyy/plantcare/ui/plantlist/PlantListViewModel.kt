@@ -8,10 +8,10 @@ import example.smyy.plantcare.data.model.db.Plant
 
 class PlantListViewModel internal constructor() : ViewModel() {
 
-    private val plantList = MediatorLiveData<List<Plant>>()
+    private val plantList = MutableLiveData<List<Plant>>()
 
     init {
-        //plantList.addSource(livePlantList, plantList::setValue)
+
     }
 
     fun getPlants() = plantList
