@@ -12,16 +12,21 @@ import example.smyy.plantcare.data.model.db.Plant
 import example.smyy.plantcare.ui.addplant.AddPlantActivity
 import kotlinx.android.synthetic.main.activity_plant_list.*
 import java.sql.Time
+import javax.inject.Inject
+import javax.inject.Named
 
 class PlantListActivity : AppCompatActivity() {
     val plantList: ArrayList<Plant> = ArrayList()
+
+    @field:[Inject Named("something")]
+    lateinit var something: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_plant_list)
 
         addPlant()
-
+        var some = something;
         rvPlants.layoutManager = LinearLayoutManager(this)
         rvPlants.adapter = PlantAdapter(plantList, this)
 
@@ -32,6 +37,7 @@ class PlantListActivity : AppCompatActivity() {
         inflater.inflate(R.menu.toolbar_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_add -> {
@@ -42,6 +48,7 @@ class PlantListActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+
     fun addPlant() {
         plantList.add(Plant("1", "kıvırcık", "deneme", 4,
                 "", 3, 5, 5))

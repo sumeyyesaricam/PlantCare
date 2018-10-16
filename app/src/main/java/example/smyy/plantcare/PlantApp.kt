@@ -5,6 +5,7 @@ import android.app.Application
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
+import example.smyy.plantcare.di.module.AppModule
 import javax.inject.Inject
 
  class PlantApp : Application(), HasActivityInjector {
@@ -14,10 +15,11 @@ import javax.inject.Inject
 
     override fun onCreate() {
         super.onCreate()
-        /*DaggerAppComponent.builder()
+
+        DaggerAppComponent.builder()
                 .application(this)
                 .build()
-                .inject(this)*/
+                .inject(this)
     }
 
 

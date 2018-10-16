@@ -40,11 +40,14 @@ dependencies {
     implementation "android.arch.persistence.room:runtime:$rootProject.roomVersion"
     implementation 'com.android.support:cardview-v7:28.0.0'
 
-    // dependency injection
+    // ... other dependencies ...
+
     implementation "com.google.dagger:dagger:$rootProject.dagger2Version"
-    annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.dagger2Version"
-    annotationProcessor "com.google.dagger:dagger-android-processor:$rootProject.dagger2Version"
+    implementation "com.google.dagger:dagger-android:$rootProject.dagger2Version"
     implementation "com.google.dagger:dagger-android-support:$rootProject.dagger2Version"
+    //kapt "com.google.dagger:dagger-android-processor:$rootProject.versions.dagger"
+    //kapt "com.google.dagger:dagger-compiler:$rootProject.versions.dagger"
+    //kapt 'com.google.dagger:dagger-compiler:2.15'
 
 
 }
