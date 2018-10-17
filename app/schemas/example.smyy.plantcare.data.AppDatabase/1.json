@@ -1,0 +1,67 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "b198f15214390f7df2aa7aa9a5716457",
+    "entities": [
+      {
+        "tableName": "plants",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT, `name` TEXT, `description` TEXT, `wateringInterval` INTEGER, `imageUrl` TEXT, `fertilizerInterval` INTEGER, `wateringTime` INTEGER, `fertilizierTime` INTEGER, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "plantId",
+            "columnName": "id",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "wateringInterval",
+            "columnName": "wateringInterval",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "imageUrl",
+            "columnName": "imageUrl",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "fertilizerInterval",
+            "columnName": "fertilizerInterval",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "wateringTime",
+            "columnName": "wateringTime",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "fertilizierTime",
+            "columnName": "fertilizierTime",
+            "affinity": "INTEGER"
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"b198f15214390f7df2aa7aa9a5716457\")"
+    ]
+  }
+}

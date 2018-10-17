@@ -1,25 +1,44 @@
 package example.smyy.plantcare.di.module
 
 import android.app.Application
+import android.arch.persistence.room.Room
 import android.content.Context
+import android.content.SharedPreferences
+import android.content.res.Resources
+import android.preference.PreferenceManager
 import dagger.Module
 import dagger.Provides
-import dagger.android.AndroidInjectionModule
-import dagger.android.DaggerApplication
-import example.smyy.plantcare.di.ForApplication
+import example.smyy.plantcare.data.AppDatabase
+import example.smyy.plantcare.data.dao.PlantDao
+import example.smyy.plantcare.data.repository.PlantRepository
 import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
-class AppModule(private  val application: Application){
+class AppModule {
+
+    @Singleton
+    @Provides
+    fun providesPreferenceUtils(application: Application): SharedPreferences =
+            PreferenceManager.getDefaultSharedPreferences(application)
 
     @Provides
     @Singleton
-    @ForApplication
-    fun provideApplicationContext(): Context = application
+    fun providesResources(application: Application): Resources = application.resources
 
-    @Provides
     @Singleton
-    @Named("something")
-    fun provideSomething(): String = "something"
+    @Provides
+    fun provideContext(application: Application) : Context {
+        return application.applicationContext
+    }
+
+    @Singleton
+    @Provides
+    fun providesAppDatabase(context: Context): AppDatabase = AppDatabase.createPersistentDatabase(context)
+
+
+    @Singleton
+    @Provides
+    fun providesPlantDao(database: AppDatabase) = database.plantDao()
+
 }

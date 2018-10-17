@@ -5,25 +5,24 @@ import android.app.Application
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
+import example.smyy.plantcare.di.component.DaggerAppComponent
 import example.smyy.plantcare.di.module.AppModule
 import javax.inject.Inject
 
  class PlantApp : Application(), HasActivityInjector {
 
-    @Inject
-    internal var activityDispatchingAndroidInjector: DispatchingAndroidInjector<Activity>? = null
+     override fun activityInjector(): DispatchingAndroidInjector<Activity> = mAndroidInjector
+
+     @Inject
+     lateinit var mAndroidInjector: DispatchingAndroidInjector<Activity>
 
     override fun onCreate() {
         super.onCreate()
-
         DaggerAppComponent.builder()
-                .application(this)
+                .app(this)
                 .build()
                 .inject(this)
+
     }
 
-
-    override fun activityInjector(): AndroidInjector<Activity>? {
-        return activityDispatchingAndroidInjector
-    }
 }

@@ -4,9 +4,13 @@ import android.arch.lifecycle.MediatorLiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
+import android.content.res.Resources
 import example.smyy.plantcare.data.model.db.Plant
+import example.smyy.plantcare.data.repository.PlantRepository
+import javax.inject.Inject
+import javax.inject.Named
 
-class PlantListViewModel internal constructor() : ViewModel() {
+class PlantListViewModel @Inject constructor(private val plantRepository: PlantRepository) : ViewModel() {
 
     private val plantList = MutableLiveData<List<Plant>>()
 
@@ -14,6 +18,8 @@ class PlantListViewModel internal constructor() : ViewModel() {
 
     }
 
-    fun getPlants() = plantList
+    fun getPlants() = plantRepository.getPlants()
+
+    fun insertPlant(plant:Plant) = plantRepository.insertPlant(plant)
 
 }

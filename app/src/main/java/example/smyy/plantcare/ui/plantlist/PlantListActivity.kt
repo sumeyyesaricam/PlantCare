@@ -1,5 +1,6 @@
 package example.smyy.plantcare.ui.plantlist
 
+import android.arch.lifecycle.MutableLiveData
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -7,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.Menu
 import android.view.MenuItem
+import dagger.android.AndroidInjection
 import example.smyy.plantcare.R
 import example.smyy.plantcare.data.model.db.Plant
 import example.smyy.plantcare.ui.addplant.AddPlantActivity
@@ -16,19 +18,20 @@ import javax.inject.Inject
 import javax.inject.Named
 
 class PlantListActivity : AppCompatActivity() {
+    /*@Inject
+    lateinit var mPlantListViewModel: PlantListViewModel*/
+
     val plantList: ArrayList<Plant> = ArrayList()
 
-    @field:[Inject Named("something")]
-    lateinit var something: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_plant_list)
-
         addPlant()
-        var some = something;
         rvPlants.layoutManager = LinearLayoutManager(this)
         rvPlants.adapter = PlantAdapter(plantList, this)
+        //val plants = mPlantListViewModel!!.getPlants()
 
     }
 
