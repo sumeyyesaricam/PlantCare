@@ -32,7 +32,7 @@ class AddPlantActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_plant)
         val binding: ActivityAddPlantBinding = DataBindingUtil.setContentView(this, R.layout.activity_add_plant)
         binding.plantActivity = this
-        plantview= binding.plant!!
+        //plantview= binding.plant!!
     }
 
     fun onClickAddPlant(view: View) {
