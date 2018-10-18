@@ -1,13 +1,11 @@
 package example.smyy.plantcare.ui.plantlist
 
-import android.arch.lifecycle.MutableLiveData
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.android.AndroidInjection
 import example.smyy.plantcare.R
 import example.smyy.plantcare.data.model.db.Plant
@@ -53,14 +51,14 @@ class PlantListActivity : AppCompatActivity() {
     }
 
     fun addPlant() {
-        plantList.add(Plant("1", "kıvırcık", "deneme", 4,
-                "", 3, 5, 5))
+        plantList.add(Plant("1", "kıvırcık", "deneme", 4, 3, 5, 5,
+                ""))
 
-        plantList.add(Plant("2", "kaktüs", "asdfghj", 4,
-                "", 3, 2, 2))
+        plantList.add(Plant("2", "kaktüs", "asdfghj", 4, 3, 2, 2,
+                ""))
 
-        plantList.add(Plant("3", "gül", "asdfghj", 4,
-                "", 3, 2, 2))
+        plantList.add(Plant("3", "gül", "asdfghj", 4, 3, 2, 2,
+                ""))
     }
 
 

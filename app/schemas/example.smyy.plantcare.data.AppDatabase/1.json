@@ -2,51 +2,59 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "b198f15214390f7df2aa7aa9a5716457",
+    "identityHash": "5f850ae95beeb261e418c3d7dcfc8570",
     "entities": [
       {
         "tableName": "plants",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT, `name` TEXT, `description` TEXT, `wateringInterval` INTEGER, `imageUrl` TEXT, `fertilizerInterval` INTEGER, `wateringTime` INTEGER, `fertilizierTime` INTEGER, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `name` TEXT NOT NULL, `description` TEXT NOT NULL, `wateringInterval` INTEGER NOT NULL, `fertilizerInterval` INTEGER NOT NULL, `wateringTime` INTEGER NOT NULL, `fertilizierTime` INTEGER NOT NULL, `ImageUrl` TEXT NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "plantId",
             "columnName": "id",
-            "affinity": "TEXT"
+            "affinity": "TEXT",
+            "notNull": true
           },
           {
             "fieldPath": "name",
             "columnName": "name",
-            "affinity": "TEXT"
+            "affinity": "TEXT",
+            "notNull": true
           },
           {
             "fieldPath": "description",
             "columnName": "description",
-            "affinity": "TEXT"
+            "affinity": "TEXT",
+            "notNull": true
           },
           {
             "fieldPath": "wateringInterval",
             "columnName": "wateringInterval",
-            "affinity": "INTEGER"
-          },
-          {
-            "fieldPath": "imageUrl",
-            "columnName": "imageUrl",
-            "affinity": "TEXT"
+            "affinity": "INTEGER",
+            "notNull": true
           },
           {
             "fieldPath": "fertilizerInterval",
             "columnName": "fertilizerInterval",
-            "affinity": "INTEGER"
+            "affinity": "INTEGER",
+            "notNull": true
           },
           {
             "fieldPath": "wateringTime",
             "columnName": "wateringTime",
-            "affinity": "INTEGER"
+            "affinity": "INTEGER",
+            "notNull": true
           },
           {
             "fieldPath": "fertilizierTime",
             "columnName": "fertilizierTime",
-            "affinity": "INTEGER"
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ImageUrl",
+            "columnName": "ImageUrl",
+            "affinity": "TEXT",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -61,7 +69,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"b198f15214390f7df2aa7aa9a5716457\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"5f850ae95beeb261e418c3d7dcfc8570\")"
     ]
   }
 }

@@ -1,7 +1,6 @@
 package example.smyy.plantcare.ui.plantlist
 
 import android.app.Application
-import android.arch.persistence.room.Room
 import android.content.Context
 import dagger.Module
 import dagger.Provides

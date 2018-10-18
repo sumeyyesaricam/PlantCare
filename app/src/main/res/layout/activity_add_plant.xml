@@ -14,7 +14,7 @@
             type="example.smyy.plantcare.ui.addplant.AddPlantActivity" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@mipmap/backadd"
@@ -24,15 +24,14 @@
             android:id="@+id/btnCreateAlarm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="56dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignStart="@+id/imageButton"
+            android:layout_marginTop="158dp"
             android:background="#EBCAB9"
             android:drawableLeft="@mipmap/alarm"
+            android:onClick="@{plantActivity::onClickAddAlarm}"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:onClick="@{plantActivity::onClickAddAlarm}"
             android:text="@string/create_alarm"
             app:layout_constraintBottom_toTopOf="@+id/editText2"
             app:layout_constraintEnd_toEndOf="parent"
@@ -45,10 +44,9 @@
             android:id="@+id/imageButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="68dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="42dp"
             android:background="@android:color/transparent"
             android:onClick="@{(view)->plantActivity.onClickImage(view)}"
             app:layout_constraintBottom_toTopOf="@+id/editText"
@@ -63,9 +61,9 @@
             android:id="@+id/editText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="208dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="60dp"
             android:ems="10"
             android:inputType="textPersonName"
             android:text="@{plant.name}"
@@ -114,16 +112,16 @@
             android:id="@+id/button2"
             android:layout_width="wrap_content"
             android:layout_height="53dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="-56dp"
+            android:layout_toEndOf="@+id/btnCreateAlarm"
             android:background="@drawable/ic_launcher_background"
-            android:text="@string/save"
             android:onClick="@{plantActivity::onClickAddPlant}"
+            android:text="@string/save"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.238"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-    </android.support.constraint.ConstraintLayout>
+    </RelativeLayout>
 </layout>

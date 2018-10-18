@@ -1,10 +1,8 @@
 package example.smyy.plantcare.ui.plantlist
 
-import android.arch.lifecycle.MediatorLiveData
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.Transformations
-import android.arch.lifecycle.ViewModel
 import android.content.res.Resources
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import example.smyy.plantcare.data.model.db.Plant
 import example.smyy.plantcare.data.repository.PlantRepository
 import javax.inject.Inject

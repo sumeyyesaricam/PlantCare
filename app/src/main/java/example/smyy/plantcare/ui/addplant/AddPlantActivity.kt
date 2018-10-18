@@ -1,7 +1,6 @@
 package example.smyy.plantcare.ui.addplant
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.Menu
@@ -9,9 +8,9 @@ import android.view.MenuItem
 import android.view.View
 import example.smyy.plantcare.R
 import android.content.ClipData.newIntent
-import android.databinding.DataBindingUtil
 import android.view.LayoutInflater
-import com.android.databinding.library.baseAdapters.BR.plant
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import dagger.android.AndroidInjection
 import example.smyy.plantcare.data.model.db.Plant
 import example.smyy.plantcare.databinding.ActivityAddPlantBinding
