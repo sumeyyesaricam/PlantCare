@@ -1,6 +1,7 @@
 package example.smyy.plantcare.ui.plantlist
 
 import android.content.res.Resources
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import example.smyy.plantcare.data.model.db.Plant

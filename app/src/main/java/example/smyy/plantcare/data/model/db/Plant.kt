@@ -6,9 +6,9 @@ import androidx.room.PrimaryKey
 import java.util.*
 
 @Entity(tableName = "plants")
-data class Plant(@PrimaryKey @ColumnInfo(name = "id") val plantId:String, val name:String,
-                 val description:String, val wateringInterval:Int, val fertilizerInterval:Int,
-                 val wateringTime:Int, val fertilizierTime:Int,
+data class Plant(@PrimaryKey @ColumnInfo(name = "id") val plantId:String, var name:String,
+                 var description:String, var wateringInterval:Int, var fertilizerInterval:Int,
+                 var wateringTime:Int, var fertilizierTime:Int,
                  val ImageUrl:String=""){
 
 }

@@ -23,20 +23,22 @@ class AddPlantActivity : AppCompatActivity() {
 
     @Inject
     lateinit var mPlantListViewModel: PlantListViewModel
-    lateinit var plantview: Plant
-
+    lateinit var binding: ActivityAddPlantBinding
     var REQUEST_CAMERA = 1000;
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_plant)
-        val binding: ActivityAddPlantBinding = DataBindingUtil.setContentView(this, R.layout.activity_add_plant)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_add_plant)
         binding.plantActivity = this
-        //plantview= binding.plant!!
+
     }
 
     fun onClickAddPlant(view: View) {
-        mPlantListViewModel.insertPlant(plantview)
+        var name=binding.etName.getText().toString()
+        var description= binding.etName.getText().toString()
+        var plant =Plant("1",name,description,1,2,2,2,"")
+        mPlantListViewModel.insertPlant(plant)
     }
 
     fun onClickImage(view: View) {
