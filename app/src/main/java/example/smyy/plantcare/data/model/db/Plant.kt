@@ -9,6 +9,4 @@ import java.util.*
 data class Plant(@PrimaryKey @ColumnInfo(name = "id") val plantId:String, var name:String,
                  var description:String, var wateringInterval:Int, var fertilizerInterval:Int,
                  var wateringTime:Int, var fertilizierTime:Int,
-                 val ImageUrl:String=""){
-
-}
+                 val ImageUrl:String="")

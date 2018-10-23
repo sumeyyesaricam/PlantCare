@@ -10,10 +10,14 @@ import example.smyy.plantcare.data.model.db.Plant
 import example.smyy.plantcare.databinding.ItemPlantBinding
 import kotlinx.android.synthetic.main.item_plant.view.*
 
-class PlantAdapter(val items : ArrayList<Plant>, val context: Context) : RecyclerView.Adapter<ViewHolder>() {
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(createOnClickListener(items[position].plantId),items[position])
+class PlantAdapter(val context: Context) : RecyclerView.Adapter<ViewHolder>() {
 
+    private val inflater: LayoutInflater = LayoutInflater.from(context)
+    private var plants = emptyList<Plant>()
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val current = plants[position]
+        holder.bind(createOnClickListener(plants[position].plantId),plants[position])
     }
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
@@ -22,7 +26,7 @@ class PlantAdapter(val items : ArrayList<Plant>, val context: Context) : Recycle
     }
 
     override fun getItemCount(): Int {
-        return items.size
+        return plants.size
     }
 
     private fun createOnClickListener(plantId: String): View.OnClickListener {
@@ -32,7 +36,10 @@ class PlantAdapter(val items : ArrayList<Plant>, val context: Context) : Recycle
             //it.findNavController().navigate(direction)
         }
     }
-
+    internal fun setPlants(plants: List<Plant>) {
+        this.plants = plants
+        notifyDataSetChanged()
+    }
 }
 
 class ViewHolder (private val binding: ItemPlantBinding) : RecyclerView.ViewHolder(binding.root) {
