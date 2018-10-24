@@ -11,21 +11,12 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class PlantRepository  @Inject constructor (private val plantDao: PlantDao) {
-//class PlantRepository constructor(private val plantDao: PlantDao) {
 
-    val allWords: LiveData<List<Plant>> = plantDao.loadAll()
     fun getPlants() = plantDao.loadAll()
 
-    //fun insertPlant(plant: Plant) : Disposable? {
     fun insertPlant(plant: Plant): Single<Unit> = Single.fromCallable {
         plantDao.insertPlant(plant)
     }
 
-    /*return Observable.fromCallable { plantDao.insertPlant(plant) }
-             .subscribeOn(Schedulers.io())
-             .observeOn(Schedulers.io())
-             .subscribe {
-
-             }*/
 
 }

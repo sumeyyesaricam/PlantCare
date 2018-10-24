@@ -25,8 +25,9 @@ class AppModule {
     @Singleton
     fun providesResources(application: Application): Resources = application.resources
 
-    @Singleton
+
     @Provides
+    @Singleton
     fun provideContext(application: Application) : Context {
         return application.applicationContext
     }

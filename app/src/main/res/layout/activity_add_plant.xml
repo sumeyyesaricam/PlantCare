@@ -14,50 +14,22 @@
             type="example.smyy.plantcare.ui.addplant.AddPlantActivity" />
     </data>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@mipmap/backadd"
+        android:orientation="vertical"
         tools:context=".ui.addplant.AddPlantActivity">
 
-        <Button
-            android:id="@+id/btnCreateAlarm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/imageButton"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="193dp"
-            android:layout_marginTop="226dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginBottom="-51dp"
-            android:background="#EBCAB9"
-            android:drawableLeft="@mipmap/alarm"
-            android:onClick="@{plantActivity::onClickAddAlarm}"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:text="@string/create_alarm"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.362"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintVertical_bias="0.122" />
-
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/ImgPlant"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="42dp"
-            android:layout_marginTop="-461dp"
-            android:layout_marginBottom="59dp"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:onClick="@{plantActivity::onClickImage}"
             android:background="@android:color/transparent"
-            android:onClick="@{(view)->plantActivity.onClickImage(view)}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.203"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.544"
-            app:srcCompat="@mipmap/pot" />
+            android:src="@mipmap/pot" />
 
         <EditText
             android:id="@+id/etName"
@@ -65,50 +37,49 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
-            android:layout_marginBottom="299dp"
-            android:layout_marginStart="12dp"
             android:ems="10"
+            android:layout_margin="8dp"
+            android:hint="@string/plant_name"
             android:inputType="textPersonName"
-            android:text="@{plant.name}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.405"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:text="@{plant.name}" />
 
         <EditText
             android:id="@+id/etDescription"
-            android:layout_width="8dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
+            android:layout_margin="8dp"
             android:layout_below="@+id/btnCreateAlarm"
-            android:layout_marginBottom="67dp"
-            android:layout_marginEnd="260dp"
-            android:layout_marginStart="116dp"
-            android:layout_marginTop="231dp"
             android:ems="10"
+            android:hint="@string/write_description"
             android:inputType="textMultiLine"
-            android:text="@{plant.description}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:text="@{plant.description}" />
+
+        <Button
+            android:id="@+id/btnCreateAlarm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="8dp"
+            android:layout_alignStart="@+id/imageButton"
+            android:drawablePadding="10dp"
+            android:background="#EBCAB9"
+            android:drawableLeft="@mipmap/alarm"
+            android:layout_gravity="end"
+            android:onClick="@{plantActivity::onClickAddAlarm}"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/create_alarm" />
 
         <ScrollView
-            android:layout_width="0dp"
-            android:layout_height="134dp"
-            android:layout_below="@+id/btnCreateAlarm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignEnd="@+id/btnCreateAlarm"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="139dp"
-            android:layout_marginTop="103dp"
-            android:layout_marginEnd="80dp"
-            android:layout_marginBottom="173dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintVertical_bias="0.862">
+            android:layout_below="@+id/btnCreateAlarm">
 
             <LinearLayout
                 android:id="@+id/linearlayout"
@@ -118,17 +89,5 @@
         </ScrollView>
 
 
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="-16dp"
-            android:layout_marginEnd="33dp"
-            android:layout_marginBottom="19dp"
-            android:onClick="@{plantActivity::onClickAddPlant}"
-            android:text="@string/save" />
-
-    </RelativeLayout>
+    </LinearLayout>
 </layout>

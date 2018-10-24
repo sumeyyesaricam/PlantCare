@@ -7,59 +7,47 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import example.smyy.plantcare.R
-import android.content.ClipData.newIntent
-import android.view.LayoutInflater
-import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProviders
-import dagger.android.AndroidInjection
-import example.smyy.plantcare.data.AppDatabase
-import example.smyy.plantcare.data.dao.PlantDao
+import android.content.Context
+import example.smyy.plantcare.BR
 import example.smyy.plantcare.data.model.db.Plant
 import example.smyy.plantcare.databinding.ActivityAddPlantBinding
-import example.smyy.plantcare.ui.plantlist.PlantListViewModel
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import example.smyy.plantcare.ui.base.BaseActivity
+import example.smyy.plantcare.ui.plantlist.PlantListActivity
+import example.smyy.plantcare.viewmodel.PlantViewModel
 import kotlinx.android.synthetic.main.activity_add_plant.*
 import javax.inject.Inject
 
 
-class AddPlantActivity : AppCompatActivity() {
+class AddPlantActivity : BaseActivity<ActivityAddPlantBinding, PlantViewModel>() {
 
-    // @Inject
-    //lateinit var mPlantListViewModel: PlantListViewModel
+    @Inject
+    lateinit var plantViewModel: PlantViewModel
     lateinit var binding: ActivityAddPlantBinding
-    var REQUEST_CAMERA = 1000
-    lateinit var viewModel:PlantListViewModel
+    @Inject
+    lateinit var context: Context
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        //AndroidInjection.inject(this)
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_plant)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_add_plant)
-        binding.plantActivity = this
-
-        viewModel = ViewModelProviders.of(this).get(PlantListViewModel::class.java)
-
-        //viewModelFactory = Injection.provideViewModelFactory(this)
-        //viewModel = ViewModelProviders.of(this, viewModelFactory).get(PlantListViewModel::class.java)
+    override fun getBindingVariable(): Int {
+        return BR.plantActivity
     }
 
-    fun onClickAddPlant(view: View) {
-        var name=binding.etName.getText().toString()
-        var description= binding.etName.getText().toString()
-        var plant =Plant("2",name,description,1,2,2,2,"")
+    override fun getViewModel(): PlantViewModel {
+        return plantViewModel
+    }
 
-        viewModel.insertPlant(plant)
-        /*Observable.fromCallable({
-            viewModel.insertPlant(plant)
-        }).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe()
-        //viewModelFactory = Injection.provideViewModelFactory(this)
-        //viewModel = ViewModelProviders.of(this, viewModelFactory).get(UserViewModel::class.java)
-        //mPlantListViewModel.insertPlant(plant)*/
+    override fun getLayoutId(): Int {
+        return R.layout.activity_add_plant
+    }
+
+    var REQUEST_CAMERA = 1000
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = getViewDataBinding()
+        binding.plantActivity = this
+
+        val extras = intent.extras ?: return
+        var plant = extras.getParcelable("EXTRA_PLANT") as Plant
+        binding.plant = plant
     }
 
     fun onClickImage(view: View) {
@@ -68,11 +56,38 @@ class AddPlantActivity : AppCompatActivity() {
     }
 
     fun onClickAddAlarm(view: View) {
-        var inflater = layoutInflater.inflate(R.layout.item_alarm, null);
-        linearlayout.addView(inflater);
+        var inflater = layoutInflater.inflate(R.layout.item_alarm, null)
+        linearlayout.addView(inflater)
     }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.toolbar_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_remove -> {
+                val intent = Intent(this, PlantListActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+            R.id.action_save -> {
+                var name = binding.etName.getText().toString()
+                var description = binding.etDescription.getText().toString()
+                var plant = Plant("20", name, description, 1, 2, 2, 2, "")
+                plantViewModel.insertPlant(plant)
+                val intent = Intent(this, PlantListActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

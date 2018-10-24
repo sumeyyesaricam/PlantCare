@@ -16,7 +16,7 @@ abstract class AppDatabase : RoomDatabase() {
         private const val DB_NAME = "plant.db"
 
         fun createPersistentDatabase(context: Context): AppDatabase
-                = Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, DB_NAME).build()
+                = Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, DB_NAME).allowMainThreadQueries().build()
     }
 
 }

@@ -11,7 +11,7 @@ import example.smyy.plantcare.di.module.AppModule
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = arrayOf(AndroidInjectionModule::class, AppModule::class))
+@Component(modules = arrayOf(AndroidInjectionModule::class, AppModule::class,ActivityBuilder::class))
 interface AppComponent: AndroidInjector<PlantApp> {
 
     fun inject(application: Application)

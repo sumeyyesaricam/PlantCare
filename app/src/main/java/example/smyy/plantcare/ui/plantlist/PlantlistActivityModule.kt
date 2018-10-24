@@ -5,30 +5,22 @@ import android.content.Context
 import dagger.Module
 import dagger.Provides
 import example.smyy.plantcare.data.AppDatabase
-import example.smyy.plantcare.data.dao.PlantDao
 import example.smyy.plantcare.data.repository.PlantRepository
+import example.smyy.plantcare.viewmodel.PlantViewModel
 import javax.inject.Singleton
 
 @Module
 class PlantlistActivityModule{
 
-
-    /*@Singleton
     @Provides
-    fun provideContext(application: Application) : Context {
-        return application.applicationContext
+    internal fun providePlantViewModel(plantRepository: PlantRepository): PlantViewModel {
+        return PlantViewModel(plantRepository)
     }
 
-    @Singleton
     @Provides
-    fun providesAppDatabase(context: Context): AppDatabase =
-            Room.databaseBuilder(context, AppDatabase::class.java, "my-plant-db").build()
+    @Singleton
+    internal fun providePlantAdapter(context: Context): PlantAdapter {
+        return PlantAdapter(context)
+    }
 
-    @Singleton
-    @Provides
-    fun providesPlantDao(database: AppDatabase) = database.plantDao()
-
-    @Singleton
-    @Provides
-    fun providesPlantRepository(plantDao: PlantDao) = PlantRepository(plantDao)*/
 }
