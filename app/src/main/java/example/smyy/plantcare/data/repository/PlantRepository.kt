@@ -18,5 +18,7 @@ class PlantRepository  @Inject constructor (private val plantDao: PlantDao) {
         plantDao.insertPlant(plant)
     }
 
-
+    fun removePlant(plant: Plant): Single<Unit> = Single.fromCallable {
+        plantDao.removePlant(plant)
+    }
 }

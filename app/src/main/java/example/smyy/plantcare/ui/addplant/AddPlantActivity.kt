@@ -23,6 +23,7 @@ class AddPlantActivity : BaseActivity<ActivityAddPlantBinding, PlantViewModel>()
     @Inject
     lateinit var plantViewModel: PlantViewModel
     lateinit var binding: ActivityAddPlantBinding
+    var plant: Plant? = null
     @Inject
     lateinit var context: Context
 
@@ -46,7 +47,7 @@ class AddPlantActivity : BaseActivity<ActivityAddPlantBinding, PlantViewModel>()
         binding.plantActivity = this
 
         val extras = intent.extras ?: return
-        var plant = extras.getParcelable("EXTRA_PLANT") as Plant
+        plant = extras.getParcelable("EXTRA_PLANT") as Plant
         binding.plant = plant
     }
 
@@ -74,6 +75,10 @@ class AddPlantActivity : BaseActivity<ActivityAddPlantBinding, PlantViewModel>()
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_remove -> {
+                plant?.let {
+                    plantViewModel.removePlant(plant!!)
+                }
+
                 val intent = Intent(this, PlantListActivity::class.java)
                 startActivity(intent)
                 return true
@@ -81,8 +86,14 @@ class AddPlantActivity : BaseActivity<ActivityAddPlantBinding, PlantViewModel>()
             R.id.action_save -> {
                 var name = binding.etName.getText().toString()
                 var description = binding.etDescription.getText().toString()
-                var plant = Plant("20", name, description, 1, 2, 2, 2, "")
-                plantViewModel.insertPlant(plant)
+                var item:Plant
+                if(plant==null){
+                    item = Plant("20", name, description, 1, 2, 2, 2, "")
+                }
+                else{
+                    item = Plant(plant!!.plantId, name, description, 1, 2, 2, 2, "")
+                }
+                plantViewModel.insertPlant(item)
                 val intent = Intent(this, PlantListActivity::class.java)
                 startActivity(intent)
                 return true
