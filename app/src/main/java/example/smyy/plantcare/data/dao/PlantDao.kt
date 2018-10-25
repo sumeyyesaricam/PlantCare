@@ -12,9 +12,9 @@ interface PlantDao {
     fun loadAll(): LiveData<List<Plant>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertPlant(plant:Plant)
+    fun insertPlant(plant:Plant):Long
 
-    @Query("SELECT * FROM plants WHERE id = :plantId")
+    @Query("SELECT * FROM plants WHERE plantId = :plantId")
     fun getPlant(plantId:String):LiveData<Plant>
 
     @Delete

@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_add_plant.*
 import javax.inject.Inject
 
 
-class AddPlantActivity : BaseActivity<ActivityAddPlantBinding, PlantViewModel>() {
+class AddPlantActivity : BaseActivity<ActivityAddPlantBinding>() {
 
     @Inject
     lateinit var plantViewModel: PlantViewModel
@@ -27,13 +27,6 @@ class AddPlantActivity : BaseActivity<ActivityAddPlantBinding, PlantViewModel>()
     @Inject
     lateinit var context: Context
 
-    override fun getBindingVariable(): Int {
-        return BR.plantActivity
-    }
-
-    override fun getViewModel(): PlantViewModel {
-        return plantViewModel
-    }
 
     override fun getLayoutId(): Int {
         return R.layout.activity_add_plant
@@ -43,12 +36,13 @@ class AddPlantActivity : BaseActivity<ActivityAddPlantBinding, PlantViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = getViewDataBinding()
+        binding=getViewDataBinding()
         binding.plantActivity = this
 
         val extras = intent.extras ?: return
-        plant = extras.getParcelable("EXTRA_PLANT") as Plant
-        binding.plant = plant
+        var plantId = extras.getString("EXTRA_PLANT")
+
+        //binding.plant = plant
     }
 
     fun onClickImage(view: View) {
@@ -87,13 +81,13 @@ class AddPlantActivity : BaseActivity<ActivityAddPlantBinding, PlantViewModel>()
                 var name = binding.etName.getText().toString()
                 var description = binding.etDescription.getText().toString()
                 var item:Plant
+                item = Plant( name, description, 1, 2, 2, 2, "")
                 if(plant==null){
-                    item = Plant("20", name, description, 1, 2, 2, 2, "")
+                    plantViewModel.insertPlant(item)
                 }
                 else{
-                    item = Plant(plant!!.plantId, name, description, 1, 2, 2, 2, "")
+                    plantViewModel.updatePlant(item)
                 }
-                plantViewModel.insertPlant(item)
                 val intent = Intent(this, PlantListActivity::class.java)
                 startActivity(intent)
                 return true

@@ -1,6 +1,7 @@
 package example.smyy.plantcare.data.repository
 
 import androidx.lifecycle.LiveData
+import example.smyy.plantcare.data.AppDatabase
 import example.smyy.plantcare.data.dao.PlantDao
 import example.smyy.plantcare.data.model.db.Plant
 import io.reactivex.Completable
@@ -10,15 +11,19 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class PlantRepository  @Inject constructor (private val plantDao: PlantDao) {
+class PlantRepository  @Inject constructor (private val appDatabase: AppDatabase) {
 
-    fun getPlants() = plantDao.loadAll()
+    fun getPlants() = appDatabase.plantDao().loadAll()
 
-    fun insertPlant(plant: Plant): Single<Unit> = Single.fromCallable {
-        plantDao.insertPlant(plant)
+    fun insertPlant(plant: Plant): Single<Long> = Single.fromCallable {
+        appDatabase.plantDao().insertPlant(plant)
     }
 
     fun removePlant(plant: Plant): Single<Unit> = Single.fromCallable {
-        plantDao.removePlant(plant)
+        appDatabase.plantDao().removePlant(plant)
+    }
+
+    fun updatePlant(plant: Plant): Single<Unit> = Single.fromCallable {
+        appDatabase.plantDao().updatePlant(plant)
     }
 }

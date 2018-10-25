@@ -10,32 +10,27 @@ import example.smyy.plantcare.ui.addplant.AddPlantActivity
 import kotlinx.android.synthetic.main.activity_plant_list.*
 import javax.inject.Inject
 import android.view.View
+import androidx.recyclerview.widget.GridLayoutManager
 import example.smyy.plantcare.BR
+import example.smyy.plantcare.PlantApp
 import example.smyy.plantcare.databinding.ActivityPlantListBinding
 import example.smyy.plantcare.ui.base.BaseActivity
 import example.smyy.plantcare.viewmodel.PlantViewModel
 
 
-class PlantListActivity :  BaseActivity<ActivityPlantListBinding, PlantViewModel>() {
+class PlantListActivity : BaseActivity<ActivityPlantListBinding>() {
 
     @Inject
     lateinit var planViewModel: PlantViewModel
 
     @Inject
-    lateinit var context: Context
+    lateinit var mLayoutManager: GridLayoutManager
 
     @Inject
     lateinit var plantAdapter: PlantAdapter
 
     lateinit var mAvtivityPlantListBinding: ActivityPlantListBinding
 
-    override fun getBindingVariable(): Int {
-       return BR.plantActivity
-    }
-
-    override fun getViewModel(): PlantViewModel {
-        return planViewModel
-    }
 
     override fun getLayoutId(): Int {
         return R.layout.activity_plant_list
@@ -46,8 +41,8 @@ class PlantListActivity :  BaseActivity<ActivityPlantListBinding, PlantViewModel
         super.onCreate(savedInstanceState)
         mAvtivityPlantListBinding = getViewDataBinding()
         mAvtivityPlantListBinding.plantActivity = this
-        rvPlants.layoutManager = LinearLayoutManager(context)
-        rvPlants.adapter = this.plantAdapter
+        rvPlants.layoutManager = mLayoutManager
+        rvPlants.adapter = plantAdapter
         planViewModel.getPlants().observe(this, Observer { plantList ->
             plantList?.let { plantAdapter.setPlants(it) }
         })
@@ -57,6 +52,5 @@ class PlantListActivity :  BaseActivity<ActivityPlantListBinding, PlantViewModel
         val intent = Intent(this, AddPlantActivity::class.java)
         startActivity(intent)
     }
-
 
 }

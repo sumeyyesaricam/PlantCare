@@ -16,15 +16,6 @@ import javax.inject.Singleton
 @Module
 class AppModule {
 
-    @Singleton
-    @Provides
-    fun providesPreferenceUtils(application: Application): SharedPreferences =
-            PreferenceManager.getDefaultSharedPreferences(application)
-
-    @Provides
-    @Singleton
-    fun providesResources(application: Application): Resources = application.resources
-
 
     @Provides
     @Singleton
@@ -37,8 +28,5 @@ class AppModule {
     fun providesAppDatabase(context: Context): AppDatabase = AppDatabase.createPersistentDatabase(context)
 
 
-    @Singleton
-    @Provides
-    fun providesPlantDao(database: AppDatabase) = database.plantDao()
 
 }

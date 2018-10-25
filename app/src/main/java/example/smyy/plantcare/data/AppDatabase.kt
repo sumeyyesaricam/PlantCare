@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import example.smyy.plantcare.data.dao.PlantDao
 import example.smyy.plantcare.data.model.db.Plant
 
-@Database(entities = [Plant::class], version = 1, exportSchema = false)
+@Database(entities = [Plant::class], version = 2, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun plantDao(): PlantDao
@@ -16,7 +16,8 @@ abstract class AppDatabase : RoomDatabase() {
         private const val DB_NAME = "plant.db"
 
         fun createPersistentDatabase(context: Context): AppDatabase
-                = Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, DB_NAME).allowMainThreadQueries().build()
+                //= Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, DB_NAME).allowMainThreadQueries().build()
+                = Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, DB_NAME).allowMainThreadQueries().fallbackToDestructiveMigration().build()
     }
 
 }

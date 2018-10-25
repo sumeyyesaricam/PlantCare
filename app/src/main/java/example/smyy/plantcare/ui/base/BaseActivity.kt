@@ -9,10 +9,9 @@ import androidx.lifecycle.ViewModel
 import dagger.android.AndroidInjection
 import example.smyy.plantcare.R
 
-abstract class BaseActivity<T: ViewDataBinding,V: ViewModel> : AppCompatActivity() {
+abstract class BaseActivity<T: ViewDataBinding> : AppCompatActivity() {
 
      lateinit var mViewDataBinding:T
-    lateinit var mViewModel:V
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,16 +25,12 @@ abstract class BaseActivity<T: ViewDataBinding,V: ViewModel> : AppCompatActivity
     @LayoutRes
     abstract fun getLayoutId(): Int
 
-    abstract fun getViewModel(): V
 
-    abstract fun getBindingVariable(): Int
     fun getViewDataBinding(): T {
         return mViewDataBinding
     }
     fun performDataBinding() {
         mViewDataBinding = DataBindingUtil.setContentView(this, getLayoutId())
-        //this.mViewModel = if (mViewModel == null) getViewModel() else mViewModel
-        //mViewDataBinding.setVariable(getBindingVariable(), mViewModel)
         mViewDataBinding.executePendingBindings()
     }
 }

@@ -37,7 +37,16 @@ class PlantViewModel @Inject constructor(private val plantRepository: PlantRepos
                     Log.d("Error View model", it.message)
                 }))
     }
-
+    fun updatePlant(plant: Plant):Unit{
+        disposable.add(plantRepository.updatePlant(plant)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    Log.d("succes view model", it.toString())
+                },{
+                    Log.d("Error View model", it.message)
+                }))
+    }
     override fun onCleared() {
         super.onCleared()
         disposable.dispose()

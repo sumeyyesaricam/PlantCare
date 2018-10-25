@@ -16,7 +16,7 @@ import example.smyy.plantcare.util.Config
 import kotlinx.android.synthetic.main.item_plant.view.*
 import javax.inject.Inject
 
-class PlantAdapter @Inject constructor(val context: Context) : RecyclerView.Adapter<ViewHolder>() {
+class PlantAdapter(val activity: PlantListActivity) : RecyclerView.Adapter<ViewHolder>() {
 
     private var plants = emptyList<Plant>()
 
@@ -35,9 +35,9 @@ class PlantAdapter @Inject constructor(val context: Context) : RecyclerView.Adap
 
     private fun createOnClickListener(plant: Plant): View.OnClickListener {
         return View.OnClickListener {
-            val intent = Intent(context, AddPlantActivity::class.java)
-            intent.putExtra("EXTRA_PLANT", plant as Parcelable)
-            context.startActivity(intent)
+            val intent = Intent(activity.applicationContext, AddPlantActivity::class.java)
+            intent.putExtra("EXTRA_PLANT", plant.plantId)
+            activity.applicationContext.startActivity(intent)
         }
     }
     internal fun setPlants(plants: List<Plant>) {

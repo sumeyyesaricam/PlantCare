@@ -10,8 +10,9 @@ import example.smyy.plantcare.ui.plantlist.PlantlistActivityModule
 
 @Module
 abstract class ActivityBuilder {
+
     @ActivityScope
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = arrayOf(PlantlistActivityModule::class))
     abstract fun bindPlantListActivity(): PlantListActivity
 
     @ActivityScope
