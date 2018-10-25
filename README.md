@@ -1,8 +1,8 @@
 
 # Languages, libraries and tools used
  Kotlin <br>
- DataBinding
- Room
- RxJava
- Dagger2
- MVVM architecture   
+ DataBinding<br>
+ Room<br>
+ RxJava<br>
+ Dagger2<br>
+ MVVM architecture   <br>
