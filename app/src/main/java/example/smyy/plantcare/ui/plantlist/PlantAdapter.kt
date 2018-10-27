@@ -1,27 +1,20 @@
 package example.smyy.plantcare.ui.plantlist
 
-import android.content.Context
 import android.content.Intent
-import android.os.Parcelable
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
-import example.smyy.plantcare.R
 import example.smyy.plantcare.data.model.db.Plant
 import example.smyy.plantcare.databinding.ItemPlantBinding
 import example.smyy.plantcare.ui.addplant.AddPlantActivity
-import example.smyy.plantcare.util.Config
-import kotlinx.android.synthetic.main.item_plant.view.*
-import javax.inject.Inject
+import example.smyy.plantcare.viewmodel.PlantItemViewModel
 
-class PlantAdapter(val activity: PlantListActivity) : RecyclerView.Adapter<ViewHolder>() {
+class PlantAdapter : RecyclerView.Adapter<ViewHolder>() {
 
     private var plants = emptyList<Plant>()
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(createOnClickListener(plants[position]),plants[position])
+        holder.bind(plants[position])
     }
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
@@ -33,24 +26,31 @@ class PlantAdapter(val activity: PlantListActivity) : RecyclerView.Adapter<ViewH
         return plants.size
     }
 
-    private fun createOnClickListener(plant: Plant): View.OnClickListener {
-        return View.OnClickListener {
-            val intent = Intent(activity.applicationContext, AddPlantActivity::class.java)
-            intent.putExtra("EXTRA_PLANT_ID", plant.plantId)
-            activity.applicationContext.startActivity(intent)
-        }
-    }
     internal fun setPlants(plants: List<Plant>) {
         this.plants = plants
         notifyDataSetChanged()
     }
 }
 
-class ViewHolder (private val binding: ItemPlantBinding) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(listener: View.OnClickListener, item: Plant) {
+
+
+class ViewHolder (private val binding: ItemPlantBinding) : PlantItemViewModel.PlantItemViewModelListener, RecyclerView.ViewHolder(binding.root) {
+    override fun onClickImage() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    val listener =this
+
+    override fun onItemClick(plantId: Int) {
+        val intent = Intent(itemView.context, AddPlantActivity::class.java)
+        intent.putExtra("EXTRA_PLANT_ID", plantId)
+        itemView.context.applicationContext.startActivity(intent)
+    }
+
+
+    fun bind(item: Plant) {
         binding.apply {
-            clickListener = listener
-            plant = item
+            viewmodel = PlantItemViewModel(item,listener)
             executePendingBindings()
         }
     }

@@ -7,12 +7,10 @@
     <data>
 
         <variable
-            name="clickListener"
-            type="android.view.View.OnClickListener" />
+            name="viewmodel"
+            type="example.smyy.plantcare.viewmodel.PlantItemViewModel" />
 
-        <variable
-            name="plant"
-            type="example.smyy.plantcare.data.model.db.Plant" />
+
     </data>
 
     <FrameLayout
@@ -25,9 +23,9 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
+            android:onClick="@{viewmodel::onItemClick}"
             android:background="@drawable/list_divider"
             android:cacheColorHint="#00000000"
-            android:onClick="@{clickListener}"
             android:orientation="vertical"
             android:weightSum="10">
 
@@ -48,7 +46,7 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_weight="1"
-                android:text="@{plant.name}"
+                android:text="@{viewmodel.name}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.362"
@@ -66,7 +64,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_weight="1"
-                android:text="@{plant.ImageUrl}"
+                android:text="@{viewmodel.ImageUrl}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -83,7 +81,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="@{plant.description}"
+                android:text="@{viewmodel.description}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.613"

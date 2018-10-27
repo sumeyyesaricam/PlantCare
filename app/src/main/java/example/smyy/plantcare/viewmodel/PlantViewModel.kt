@@ -21,9 +21,9 @@ class PlantViewModel @Inject constructor(private val plantRepository: PlantRepos
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    Log.d("succes view model", it.toString())
+                    Log.d("succes insert", it.toString())
                 },{
-                    Log.d("Error View model", it.message)
+                    Log.d("Error insert", it.message)
                 }))
     }
 
@@ -32,9 +32,9 @@ class PlantViewModel @Inject constructor(private val plantRepository: PlantRepos
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    Log.d("succes view model", it.toString())
+                    Log.d("succes remove", it.toString())
                 },{
-                    Log.d("Error View model", it.message)
+                    Log.d("Error remove", it.message)
                 }))
     }
     fun updatePlant(plant: Plant):Unit{
@@ -42,15 +42,15 @@ class PlantViewModel @Inject constructor(private val plantRepository: PlantRepos
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    Log.d("succes view model", it.toString())
+                    Log.d("succes update", it.toString())
                 },{
-                    Log.d("Error View model", it.message)
+                    Log.d("Error update", it.message)
                 }))
     }
     fun getPlant(plantId: Int)= plantRepository.getPlant(plantId)
 
     override fun onCleared() {
-        super.onCleared()
         disposable.dispose()
+        super.onCleared()
     }
 }

@@ -34,6 +34,7 @@ abstract class BaseActivity<T: ViewDataBinding> : AppCompatActivity() {
                               extras: Map<String, Any?>? = null) {
         val intent = Intent(this, cls.java)
         extras?.forEach { intent.addExtra(it.key, it.value) }
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
         startActivity(intent)
         if (finish) finish()
     }

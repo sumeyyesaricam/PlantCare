@@ -30,9 +30,7 @@ class PlantListActivity : BaseActivity<ActivityPlantListBinding>() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
-
     lateinit var mAvtivityPlantListBinding: ActivityPlantListBinding
-
 
     override fun getLayoutId(): Int {
         return R.layout.activity_plant_list
@@ -43,10 +41,10 @@ class PlantListActivity : BaseActivity<ActivityPlantListBinding>() {
         super.onCreate(savedInstanceState)
         mAvtivityPlantListBinding = getViewDataBinding()
         mAvtivityPlantListBinding.plantActivity = this
-        rvPlants.layoutManager = GridLayoutManager(this,2)
-        var plantAdapter=PlantAdapter(this)
+        rvPlants.layoutManager = GridLayoutManager(this, 2)
+        var plantAdapter = PlantAdapter()
         rvPlants.adapter = plantAdapter
-        plantViewModel=ViewModelProviders.of(this, viewModelFactory).get(PlantViewModel::class.java)
+        plantViewModel = ViewModelProviders.of(this, viewModelFactory).get(PlantViewModel::class.java)
         plantViewModel.getPlants().observe(this, Observer { plantList ->
             plantList?.let { plantAdapter.setPlants(it) }
         })
@@ -54,8 +52,6 @@ class PlantListActivity : BaseActivity<ActivityPlantListBinding>() {
 
     fun onClickAddPlant(view: View) {
         gotoActivity(AddPlantActivity::class, true, null)
-        //val intent = Intent(this, AddPlantActivity::class.java)
-        //startActivity(intent)
-    }
 
+    }
 }

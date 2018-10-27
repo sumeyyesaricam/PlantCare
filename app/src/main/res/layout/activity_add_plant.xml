@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
-            name="plant"
-            type="example.smyy.plantcare.data.model.db.Plant" />
+            name="viewmodel"
+            type="example.smyy.plantcare.viewmodel.PlantItemViewModel" />
 
-        <variable
-            name="plantActivity"
-            type="example.smyy.plantcare.ui.addplant.AddPlantActivity" />
     </data>
 
     <LinearLayout
@@ -26,8 +22,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="8dp"
-            android:onClick="@{plantActivity::onClickImage}"
             android:background="@android:color/transparent"
+            android:onClick="@{viewmodel::onClickImage}"
             android:src="@mipmap/pot" />
 
         <EditText
@@ -36,11 +32,11 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
-            android:ems="10"
-            android:inputType="textNoSuggestions"
             android:layout_margin="8dp"
+            android:ems="10"
             android:hint="@string/plant_name"
-            android:text="@{plant.name}" />
+            android:inputType="textNoSuggestions"
+            android:text="@{viewmodel.name}" />
 
         <EditText
             android:id="@+id/etDescription"
@@ -49,44 +45,24 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
-            android:layout_margin="8dp"
             android:layout_below="@+id/btnCreateAlarm"
+            android:layout_margin="8dp"
             android:ems="10"
             android:hint="@string/write_description"
             android:inputType="textNoSuggestions"
-            android:text="@{plant.description}" />
+            android:text="@{viewmodel.description}" />
 
-        <Button
-            android:id="@+id/btnCreateAlarm"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:layout_margin="8dp"
-            android:layout_alignStart="@+id/imageButton"
-            android:drawablePadding="10dp"
-            android:background="#EBCAB9"
-            android:drawableLeft="@mipmap/alarm"
-            android:layout_gravity="end"
-            android:onClick="@{plantActivity::onClickAddAlarm}"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:text="@string/create_alarm" />
+            android:layout_marginLeft="10dp"
+            android:text="Su Alarmı" />
 
-        <ScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/btnCreateAlarm"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/btnCreateAlarm">
-
-            <LinearLayout
-                android:id="@+id/linearlayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" />
-        </ScrollView>
-
+        <Spinner
+            android:id="@+id/spinner2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 </layout>

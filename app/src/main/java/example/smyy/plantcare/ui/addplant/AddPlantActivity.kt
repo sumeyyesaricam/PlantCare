@@ -7,59 +7,56 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import example.smyy.plantcare.R
-import android.content.Context
 import androidx.lifecycle.Observer
-import example.smyy.plantcare.BR
+import androidx.lifecycle.ViewModelProviders
 import example.smyy.plantcare.data.model.db.Plant
 import example.smyy.plantcare.databinding.ActivityAddPlantBinding
 import example.smyy.plantcare.ui.base.BaseActivity
 import example.smyy.plantcare.ui.plantlist.PlantListActivity
+import example.smyy.plantcare.util.Config
+import example.smyy.plantcare.util.ViewModelFactory
+import example.smyy.plantcare.viewmodel.PlantItemViewModel
 import example.smyy.plantcare.viewmodel.PlantViewModel
 import kotlinx.android.synthetic.main.activity_add_plant.*
 import javax.inject.Inject
 
 
-class AddPlantActivity : BaseActivity<ActivityAddPlantBinding>() {
+class AddPlantActivity : BaseActivity<ActivityAddPlantBinding>() ,PlantItemViewModel.PlantItemViewModelListener{
+    override fun onItemClick(plantId: Int) {
+    }
+
+    override fun onClickImage() {
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        startActivityForResult(intent, Config.REQUEST_CAMERA)
+    }
+
+    lateinit var plantViewModel: PlantViewModel
 
     @Inject
-    lateinit var plantViewModel: PlantViewModel
+    lateinit var viewModelFactory: ViewModelFactory
     lateinit var binding: ActivityAddPlantBinding
     var plant: Plant? = null
-    @Inject
-    lateinit var context: Context
 
 
     override fun getLayoutId(): Int {
         return R.layout.activity_add_plant
     }
 
-    var REQUEST_CAMERA = 1000
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = getViewDataBinding()
-        binding.plantActivity = this
 
+        plantViewModel= ViewModelProviders.of(this, viewModelFactory).get(PlantViewModel::class.java)
         val extras = intent.extras ?: return
         var plantId = extras.getInt("EXTRA_PLANT_ID")
+
         plantViewModel.getPlant(plantId).observe(this, Observer { plant ->
             plant?.let {
-                binding.plant = plant
+                binding.viewmodel = PlantItemViewModel(plant,this)
                 this.plant = plant
             }
         })
     }
-
-    fun onClickImage(view: View) {
-        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        startActivityForResult(intent, REQUEST_CAMERA)
-    }
-
-    fun onClickAddAlarm(view: View) {
-        var inflater = layoutInflater.inflate(R.layout.item_alarm, null)
-        linearlayout.addView(inflater)
-    }
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
