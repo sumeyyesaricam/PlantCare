@@ -47,6 +47,8 @@ class PlantViewModel @Inject constructor(private val plantRepository: PlantRepos
                     Log.d("Error View model", it.message)
                 }))
     }
+    fun getPlant(plantId: Int)= plantRepository.getPlant(plantId)
+
     override fun onCleared() {
         super.onCleared()
         disposable.dispose()

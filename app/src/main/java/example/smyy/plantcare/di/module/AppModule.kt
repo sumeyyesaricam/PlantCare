@@ -2,15 +2,12 @@ package example.smyy.plantcare.di.module
 
 import android.app.Application
 import android.content.Context
-import android.content.SharedPreferences
-import android.content.res.Resources
-import android.preference.PreferenceManager
+import android.view.LayoutInflater
+import androidx.recyclerview.widget.GridLayoutManager
 import dagger.Module
 import dagger.Provides
 import example.smyy.plantcare.data.AppDatabase
-import example.smyy.plantcare.data.dao.PlantDao
 import example.smyy.plantcare.data.repository.PlantRepository
-import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -23,10 +20,20 @@ class AppModule {
         return application.applicationContext
     }
 
-    @Singleton
     @Provides
+    @Singleton
     fun providesAppDatabase(context: Context): AppDatabase = AppDatabase.createPersistentDatabase(context)
 
+
+    @Provides
+    @Singleton
+    fun providesPlantRepository(appDatabase:AppDatabase): PlantRepository = PlantRepository(appDatabase)
+
+    @Provides
+    @Singleton
+    fun provideLayoutInflater( context: Context): LayoutInflater {
+        return LayoutInflater.from(context)
+    }
 
 
 }

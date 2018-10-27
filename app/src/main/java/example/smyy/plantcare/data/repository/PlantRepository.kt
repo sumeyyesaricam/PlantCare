@@ -26,4 +26,7 @@ class PlantRepository  @Inject constructor (private val appDatabase: AppDatabase
     fun updatePlant(plant: Plant): Single<Unit> = Single.fromCallable {
         appDatabase.plantDao().updatePlant(plant)
     }
+
+    fun getPlant(plantId: Int)= appDatabase.plantDao().getPlant(plantId)
+
 }

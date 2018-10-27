@@ -15,7 +15,7 @@ interface PlantDao {
     fun insertPlant(plant:Plant):Long
 
     @Query("SELECT * FROM plants WHERE plantId = :plantId")
-    fun getPlant(plantId:String):LiveData<Plant>
+    fun getPlant(plantId:Int):LiveData<Plant>
 
     @Delete
     fun removePlant(plant: Plant):Unit

@@ -8,6 +8,7 @@ import android.view.MenuItem
 import android.view.View
 import example.smyy.plantcare.R
 import android.content.Context
+import androidx.lifecycle.Observer
 import example.smyy.plantcare.BR
 import example.smyy.plantcare.data.model.db.Plant
 import example.smyy.plantcare.databinding.ActivityAddPlantBinding
@@ -36,13 +37,17 @@ class AddPlantActivity : BaseActivity<ActivityAddPlantBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding=getViewDataBinding()
+        binding = getViewDataBinding()
         binding.plantActivity = this
 
         val extras = intent.extras ?: return
-        var plantId = extras.getString("EXTRA_PLANT")
-
-        //binding.plant = plant
+        var plantId = extras.getInt("EXTRA_PLANT_ID")
+        plantViewModel.getPlant(plantId).observe(this, Observer { plant ->
+            plant?.let {
+                binding.plant = plant
+                this.plant = plant
+            }
+        })
     }
 
     fun onClickImage(view: View) {
@@ -73,23 +78,20 @@ class AddPlantActivity : BaseActivity<ActivityAddPlantBinding>() {
                     plantViewModel.removePlant(plant!!)
                 }
 
-                val intent = Intent(this, PlantListActivity::class.java)
-                startActivity(intent)
+                gotoActivity(PlantListActivity::class, true, null)
                 return true
             }
             R.id.action_save -> {
                 var name = binding.etName.getText().toString()
                 var description = binding.etDescription.getText().toString()
-                var item:Plant
-                item = Plant( name, description, 1, 2, 2, 2, "")
-                if(plant==null){
+                var item= Plant(name, description, 1, 2, 2, 2, "")
+                if (plant == null) {
                     plantViewModel.insertPlant(item)
-                }
-                else{
+                } else {
                     plantViewModel.updatePlant(item)
                 }
-                val intent = Intent(this, PlantListActivity::class.java)
-                startActivity(intent)
+
+                gotoActivity(PlantListActivity::class, true, null)
                 return true
             }
         }

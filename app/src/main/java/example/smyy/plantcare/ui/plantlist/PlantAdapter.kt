@@ -36,7 +36,7 @@ class PlantAdapter(val activity: PlantListActivity) : RecyclerView.Adapter<ViewH
     private fun createOnClickListener(plant: Plant): View.OnClickListener {
         return View.OnClickListener {
             val intent = Intent(activity.applicationContext, AddPlantActivity::class.java)
-            intent.putExtra("EXTRA_PLANT", plant.plantId)
+            intent.putExtra("EXTRA_PLANT_ID", plant.plantId)
             activity.applicationContext.startActivity(intent)
         }
     }

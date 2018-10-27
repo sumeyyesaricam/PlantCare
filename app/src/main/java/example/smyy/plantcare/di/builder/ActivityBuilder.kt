@@ -1,5 +1,7 @@
 package example.smyy.plantcare.di.builder
 
+import androidx.lifecycle.ViewModelProvider
+import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import example.smyy.plantcare.di.scope.ActivityScope
@@ -11,11 +13,9 @@ import example.smyy.plantcare.ui.plantlist.PlantlistActivityModule
 @Module
 abstract class ActivityBuilder {
 
-    @ActivityScope
-    @ContributesAndroidInjector(modules = arrayOf(PlantlistActivityModule::class))
+    @ContributesAndroidInjector
     abstract fun bindPlantListActivity(): PlantListActivity
 
-    @ActivityScope
     @ContributesAndroidInjector
     abstract fun bindAddPlantActivity(): AddPlantActivity
 }
