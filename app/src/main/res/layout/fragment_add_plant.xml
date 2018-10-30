@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-
         <variable
-            name="viewmodel"
-            type="example.smyy.plantcare.viewmodel.PlantItemViewModel" />
-
+            name="callback"
+            type="example.smyy.plantcare.ui.AddCallback" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".ui.addplant.AddPlantActivity">
+        android:orientation="vertical">
 
         <ImageButton
             android:id="@+id/ImgPlant"
@@ -23,7 +19,7 @@
             android:layout_gravity="center"
             android:layout_margin="8dp"
             android:background="@android:color/transparent"
-            android:onClick="@{viewmodel::onClickImage}"
+            android:onClick="@{callback::onClickPlantImage}"
             android:src="@mipmap/pot" />
 
         <EditText
@@ -35,8 +31,7 @@
             android:layout_margin="8dp"
             android:ems="10"
             android:hint="@string/plant_name"
-            android:inputType="textNoSuggestions"
-            android:text="@{viewmodel.name}" />
+            android:inputType="textNoSuggestions" />
 
         <EditText
             android:id="@+id/etDescription"
@@ -49,20 +44,27 @@
             android:layout_margin="8dp"
             android:ems="10"
             android:hint="@string/write_description"
-            android:inputType="textNoSuggestions"
-            android:text="@{viewmodel.description}" />
+            android:inputType="textNoSuggestions"/>
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="Su Alarmı" />
+            android:text="@string/water_alarm" />
 
         <Spinner
             android:id="@+id/spinner2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{callback::onClickSave}"
+            android:text="KAYDET" />
 
     </LinearLayout>
 </layout>
