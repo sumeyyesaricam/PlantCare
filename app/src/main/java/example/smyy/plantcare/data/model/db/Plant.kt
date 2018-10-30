@@ -12,8 +12,14 @@ data class Plant( var name:String,
                  var description:String, var wateringInterval:Int, var fertilizerInterval:Int,
                  var wateringTime:Int, var fertilizierTime:Int,
                  val ImageUrl:String="") : Parcelable {
-    override fun writeToParcel(dest: Parcel?, flags: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(name)
+        parcel.writeString(description)
+        parcel.writeInt(wateringInterval)
+        parcel.writeInt(fertilizerInterval)
+        parcel.writeInt(wateringTime)
+        parcel.writeInt(fertilizierTime)
+        parcel.writeString(ImageUrl)
     }
 
     @PrimaryKey(autoGenerate = true)

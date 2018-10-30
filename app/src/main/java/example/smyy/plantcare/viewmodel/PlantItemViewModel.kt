@@ -34,16 +34,12 @@ class PlantItemViewModel(private val plant: Plant, private val listener: PlantIt
 
     }
 
-    fun onClickImage(view: View) {
-        listener?.onClickImage()
-    }
     fun onItemClick(view: View) {
         listener?.onItemClick(plant)
     }
 
     interface PlantItemViewModelListener {
 
-        fun onClickImage()
         fun onItemClick(plant: Plant)
     }
 }

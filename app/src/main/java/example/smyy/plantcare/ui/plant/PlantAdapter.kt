@@ -10,7 +10,7 @@ import example.smyy.plantcare.viewmodel.PlantItemViewModel
 
 class PlantAdapter : RecyclerView.Adapter<ViewHolder>() {
 
-    private var plants = emptyList<Plant>()
+    private lateinit var plants :List<Plant>
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(plants[position])
@@ -33,15 +33,12 @@ class PlantAdapter : RecyclerView.Adapter<ViewHolder>() {
 
 
 class ViewHolder(private val binding: ItemPlantBinding) : PlantItemViewModel.PlantItemViewModelListener, RecyclerView.ViewHolder(binding.root) {
-    override fun onClickImage() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 
     val listener = this
 
     override fun onItemClick(plant: Plant) {
         val fragment = PlantDetailFragment.newInstance(plant)
-        var activity=itemView.context as PlantListActivity
+        val activity=itemView.context as PlantListActivity
         activity.showFragment(fragment,Config.PlantDetailFragment_TAG)
 
     }

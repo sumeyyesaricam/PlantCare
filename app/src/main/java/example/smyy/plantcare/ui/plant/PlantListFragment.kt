@@ -26,10 +26,8 @@ class PlantListFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentPlantListBinding.inflate(inflater, container, false)
         binding.plantActivity= activity as PlantListActivity?
-        val adapter = PlantAdapter()
-        binding.rvPlants.adapter = adapter
         binding.rvPlants.layoutManager = GridLayoutManager(binding.root.context, 2)
-        subscribeUi(adapter)
+        subscribeUi(binding)
         return binding.root
     }
     override fun onAttach(context: Context) {
@@ -37,10 +35,12 @@ class PlantListFragment : Fragment() {
         super.onAttach(context)
     }
 
-    private fun subscribeUi(plantAdapter: PlantAdapter) {
+    private fun subscribeUi(binding: FragmentPlantListBinding) {
         plantViewModel = ViewModelProviders.of(this, viewModelFactory).get(PlantViewModel::class.java)
         plantViewModel.getPlants().observe(this, Observer { plantList ->
-            plantList?.let { plantAdapter.setPlants(it) }
+            val adapter = PlantAdapter()
+            binding.rvPlants.adapter = adapter
+            plantList?.let { adapter.setPlants(it) }
         })
     }
 
