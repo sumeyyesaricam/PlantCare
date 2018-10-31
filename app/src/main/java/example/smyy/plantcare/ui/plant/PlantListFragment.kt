@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.android.support.AndroidSupportInjection
 import example.smyy.plantcare.databinding.FragmentPlantListBinding
 import example.smyy.plantcare.util.ViewModelFactory
@@ -26,7 +27,7 @@ class PlantListFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentPlantListBinding.inflate(inflater, container, false)
         binding.plantActivity= activity as PlantListActivity?
-        binding.rvPlants.layoutManager = GridLayoutManager(binding.root.context, 2)
+        binding.rvPlants.layoutManager = LinearLayoutManager(binding.root.context)
         subscribeUi(binding)
         return binding.root
     }

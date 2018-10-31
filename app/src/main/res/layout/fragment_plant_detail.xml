@@ -14,29 +14,35 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/plant_back"
         android:orientation="vertical">
 
         <ImageButton
             android:id="@+id/ImgPlant"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="154dp"
+            android:layout_height="118dp"
             android:layout_gravity="center"
-            android:layout_margin="8dp"
+            android:layout_marginTop="100dp"
             android:background="@android:color/transparent"
             android:onClick="@{callback::onClickPlantImage}"
             android:src="@mipmap/pot" />
 
         <EditText
             android:id="@+id/etName"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
             android:layout_margin="8dp"
+            android:background="@drawable/background_edittext"
+            android:padding="10dp"
             android:ems="10"
-            android:text="@{viewmodel.name}"
             android:hint="@string/plant_name"
-            android:inputType="textNoSuggestions" />
+            android:inputType="textNoSuggestions"
+            android:text="@{viewmodel.name}"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/etDescription"
@@ -47,44 +53,82 @@
             android:layout_alignParentStart="true"
             android:layout_below="@+id/btnCreateAlarm"
             android:layout_margin="8dp"
+            android:background="@drawable/background_edittext"
             android:ems="10"
-            android:text="@{viewmodel.description}"
             android:hint="@string/write_description"
-            android:inputType="textNoSuggestions"/>
+            android:inputType="textNoSuggestions"
+            android:padding="10dp"
+            android:text="@{viewmodel.description}"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="@string/water_alarm" />
+            android:textColor="@android:color/white"
+            android:text="@string/water_alarm"
+            android:textSize="14sp" />
 
         <Spinner
             android:id="@+id/spinner2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@android:color/white"
+            android:theme="@style/AppTheme" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="10dp"
+            android:text="Aydınlatma Alarmı" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
             android:layout_marginTop="10dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:layout_marginTop="10dp"
+            android:gravity="bottom|end"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="5dp"
                 android:layout_weight="1"
+                android:background="@drawable/background_button"
                 android:onClick="@{callback::onClickEdit}"
-                android:text="@string/save" />
+                android:text="@string/save"
+                android:textColor="@color/colorPrimaryDark" />
 
             <Button
                 android:id="@+id/button2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="@{callback::onClickRemove}"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:text="@string/remove" />
+                android:background="@drawable/background_button"
+                android:onClick="@{callback::onClickRemove}"
+                android:text="@string/remove"
+                android:textColor="@color/colorPrimaryDark" />
         </LinearLayout>
 
     </LinearLayout>
