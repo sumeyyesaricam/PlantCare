@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import example.smyy.plantcare.data.dao.PlantDao
 import example.smyy.plantcare.data.model.db.Plant
 
-@Database(entities = [Plant::class], version = 2, exportSchema = false)
+@Database(entities = [Plant::class], version = 3, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun plantDao(): PlantDao

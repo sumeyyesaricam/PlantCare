@@ -1,5 +1,6 @@
 package example.smyy.plantcare.ui.plant
 
+import android.R
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +8,7 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import dagger.android.support.AndroidSupportInjection
@@ -41,9 +43,11 @@ class PlantDetailFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val binding = FragmentPlantDetailBinding.inflate(inflater, container, false)
         subscribeUi()
+        binding.spinnerWater.adapter= ArrayAdapter(binding.root.context, R.layout.simple_spinner_item, (1..10).toList())
+        binding.spinnerSun.adapter= ArrayAdapter(binding.root.context, R.layout.simple_spinner_item, (1..10).toList())
         binding.viewmodel = PlantItemViewModel(plant, null)
         binding.callback = object : DetailCallback {
             override fun onClickPlantImage(view: View) {

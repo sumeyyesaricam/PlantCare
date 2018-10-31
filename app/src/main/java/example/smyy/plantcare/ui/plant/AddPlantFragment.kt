@@ -15,6 +15,7 @@ import example.smyy.plantcare.databinding.FragmentAddPlantBinding
 import example.smyy.plantcare.ui.AddCallback
 import example.smyy.plantcare.util.Config
 import example.smyy.plantcare.util.ViewModelFactory
+import example.smyy.plantcare.viewmodel.PlantItemViewModel
 import example.smyy.plantcare.viewmodel.PlantViewModel
 import javax.inject.Inject
 
@@ -29,12 +30,15 @@ class AddPlantFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentAddPlantBinding.inflate(inflater, container, false)
         subscribeUi()
+        var count: List<Int> = (1..10).toList()
         //binding.spinner_water
+        //binding.viewmodel = PlantItemViewModel(plant, null)
         binding.callback = object : AddCallback {
 
             override fun onClickSave(view: View) {
                 val name = binding.etName.text.toString()
                 val description = binding.etDescription.getText().toString()
+                //val water:Int= binding.spinnerWater.selectedItem as Int
                 val item = Plant(name, description, 1, 2, 2, 2, "")
                 plantViewModel.insertPlant(item)
                 var activity = activity as PlantListActivity
@@ -62,5 +66,6 @@ class AddPlantFragment : Fragment() {
 
     private fun subscribeUi() {
         plantViewModel = ViewModelProviders.of(this, viewModelFactory).get(PlantViewModel::class.java)
+
     }
 }

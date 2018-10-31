@@ -4,35 +4,14 @@ import android.view.View
 import androidx.databinding.ObservableField
 import example.smyy.plantcare.data.model.db.Plant
 
-class PlantItemViewModel(private val plant: Plant, private val listener: PlantItemViewModelListener?) {
-
-    var name: ObservableField<String>
-
-    var description: ObservableField<String>
-
-    var fertilizerInterval: ObservableField<Int>
-
-    var wateringTime: ObservableField<Int>
-
-    var wateringInterval: ObservableField<Int>
-
-    var fertilizierTime: ObservableField<Int>
-
-    var ImageUrl: ObservableField<String>
-
-
-
-    init {
-
-        name = ObservableField(plant.name)
-        description = ObservableField(plant.description)
-        ImageUrl = ObservableField(plant.ImageUrl)
-        fertilizerInterval = ObservableField(plant.fertilizerInterval)
-        fertilizierTime = ObservableField(plant.fertilizierTime)
-        wateringInterval = ObservableField(plant.wateringInterval)
-        wateringTime = ObservableField(plant.wateringTime)
-
-    }
+class PlantItemViewModel(var plant: Plant, private val listener: PlantItemViewModelListener?,
+                         val name :ObservableField<String> = ObservableField(plant.name),
+                         val description:ObservableField<String> = ObservableField(plant.description),
+                         val ImageUrl:ObservableField<String> = ObservableField(plant.ImageUrl),
+                         val fertilizerInterval:ObservableField<Int> = ObservableField(plant.sunInterval),
+                         val fertilizierTime :ObservableField<Int> = ObservableField(plant.sunTime),
+                         val wateringInterval:ObservableField<Int> = ObservableField(plant.wateringInterval),
+                         val wateringTime:ObservableField<Int> = ObservableField(plant.wateringTime)) {
 
     fun onItemClick(view: View) {
         listener?.onItemClick(plant)

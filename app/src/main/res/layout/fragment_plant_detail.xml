@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
         <variable
@@ -29,76 +30,117 @@
 
         <EditText
             android:id="@+id/etName"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center"
             android:layout_margin="8dp"
-            android:padding="10dp"
-            android:textColorHint="@android:color/white"
             android:backgroundTint="@android:color/white"
             android:ems="10"
             android:hint="@string/plant_name"
-            android:textColor="@android:color/white"
             android:inputType="textNoSuggestions"
+            android:padding="10dp"
             android:text="@{viewmodel.name}"
-            android:textSize="14sp" />
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white" />
 
         <EditText
             android:id="@+id/etDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:textColorHint="@android:color/white"
-            android:layout_alignParentEnd="true"
-            android:textColor="@android:color/white"
-            android:backgroundTint="@android:color/white"
-            android:layout_alignParentStart="true"
             android:layout_below="@+id/btnCreateAlarm"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center"
             android:layout_margin="8dp"
+            android:backgroundTint="@android:color/white"
             android:ems="10"
             android:hint="@string/write_description"
             android:inputType="textNoSuggestions"
             android:padding="10dp"
             android:text="@{viewmodel.description}"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="@string/water_alarm"
             android:textColor="@android:color/white"
-            android:textSize="14sp" />
-
-        <Spinner
-            android:id="@+id/spinner_water"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            style="@style/spinner_style"
-            android:textColor="@android:color/white"
-            android:theme="@style/AppTheme" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:textColor="@android:color/white"
-            android:layout_marginTop="10dp"
-            android:text="Aydınlatma Alarmı" />
-
-        <Spinner
-            android:id="@+id/spinner_sun"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
-            style="@style/spinner_style"
-            android:layout_marginTop="10dp" />
+            android:textColorHint="@android:color/white" />
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="36dp"
+                android:layout_height="21dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="8dp"
+                android:layout_weight="1"
+                app:srcCompat="@mipmap/drop" />
+
+            <Spinner
+                android:id="@+id/spinnerWater"
+                style="@style/spinner_style"
+                android:layout_width="231dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:textColor="@android:color/white"
+                android:theme="@style/AppTheme" />
+
+
+            <Button
+                android:id="@+id/button33"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_bg"
+                android:drawableLeft="@mipmap/alarm"
+                android:paddingLeft="8dp"
+                android:text="11:00"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="36dp"
+                android:layout_height="21dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="8dp"
+                android:layout_weight="1"
+                app:srcCompat="@mipmap/sun_white" />
+
+            <Spinner
+                android:id="@+id/spinnerSun"
+                style="@style/spinner_style"
+                android:layout_width="232dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:textColor="@android:color/white"
+                android:theme="@style/AppTheme" />
+
+
+            <Button
+                android:id="@+id/button34"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_bg"
+                android:drawableLeft="@mipmap/alarm"
+                android:paddingLeft="8dp"
+                android:text="11:00"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="end"
@@ -110,29 +152,33 @@
                 android:id="@+id/button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="120dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="5dp"
-                android:layout_weight="1"
                 android:background="@drawable/button_bg"
+                android:drawableLeft="@mipmap/save_white"
                 android:onClick="@{callback::onClickEdit}"
-                android:padding="5dp"
+                android:paddingLeft="8dp"
                 android:text="@string/save"
-                android:textColor="@color/colorPrimaryDark" />
+                android:textColor="@android:color/white" />
 
             <Button
                 android:id="@+id/button2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="10dp"
                 android:background="@drawable/button_bg"
+                android:drawableLeft="@mipmap/remove"
                 android:onClick="@{callback::onClickRemove}"
+                android:paddingLeft="8dp"
                 android:text="@string/remove"
-                android:textColor="@color/colorPrimaryDark" />
-        </LinearLayout>
+                android:textColor="@android:color/white" />
+        </RelativeLayout>
 
     </LinearLayout>
 </layout>

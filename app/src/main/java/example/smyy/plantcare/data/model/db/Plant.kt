@@ -9,16 +9,16 @@ import java.util.*
 
 @Entity(tableName = "plants")
 data class Plant( var name:String,
-                 var description:String, var wateringInterval:Int, var fertilizerInterval:Int,
-                 var wateringTime:Int, var fertilizierTime:Int,
+                 var description:String, var wateringInterval:Int, var sunInterval:Int,
+                 var wateringTime:Int, var sunTime:Int,
                  val ImageUrl:String="") : Parcelable {
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(name)
         parcel.writeString(description)
         parcel.writeInt(wateringInterval)
-        parcel.writeInt(fertilizerInterval)
+        parcel.writeInt(sunInterval)
         parcel.writeInt(wateringTime)
-        parcel.writeInt(fertilizierTime)
+        parcel.writeInt(sunTime)
         parcel.writeString(ImageUrl)
     }
 
