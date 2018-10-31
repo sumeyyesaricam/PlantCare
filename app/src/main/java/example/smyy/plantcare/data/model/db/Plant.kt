@@ -11,8 +11,42 @@ import java.util.*
 data class Plant( var name:String,
                  var description:String, var wateringInterval:Int, var fertilizerInterval:Int,
                  var wateringTime:Int, var fertilizierTime:Int,
-                 val ImageUrl:String="") {
+                 val ImageUrl:String="") : Parcelable {
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(name)
+        parcel.writeString(description)
+        parcel.writeInt(wateringInterval)
+        parcel.writeInt(fertilizerInterval)
+        parcel.writeInt(wateringTime)
+        parcel.writeInt(fertilizierTime)
+        parcel.writeString(ImageUrl)
+    }
 
     @PrimaryKey(autoGenerate = true)
     var plantId:Int=0
+
+    constructor(parcel: Parcel) : this(
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readInt(),
+            parcel.readInt(),
+            parcel.readInt(),
+            parcel.readInt(),
+            parcel.readString()) {
+        plantId = parcel.readInt()
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<Plant> {
+        override fun createFromParcel(parcel: Parcel): Plant {
+            return Plant(parcel)
+        }
+
+        override fun newArray(size: Int): Array<Plant?> {
+            return arrayOfNulls(size)
+        }
+    }
 }

@@ -15,7 +15,7 @@ import kotlin.reflect.KClass
 
 abstract class BaseActivity<T: ViewDataBinding> : AppCompatActivity() {
 
-     lateinit var mViewDataBinding:T
+     private lateinit var mViewDataBinding:T
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

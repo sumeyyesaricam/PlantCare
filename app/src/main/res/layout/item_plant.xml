@@ -5,17 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewmodel"
             type="example.smyy.plantcare.viewmodel.PlantItemViewModel" />
-
-
     </data>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,7 +22,6 @@
             android:cacheColorHint="#00000000"
             android:orientation="vertical"
             android:weightSum="10">
-
 
             <ImageView
                 android:id="@+id/ImagePlant"
@@ -90,10 +83,4 @@
                 app:layout_constraintVertical_bias="0.888" />
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="31dp"
-            android:layout_height="26dp"
-            android:src="@mipmap/water" />
-    </FrameLayout>
 </layout>

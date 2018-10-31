@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="callback"
+            type="example.smyy.plantcare.ui.AddCallback" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/plant_back"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/ImgPlant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="75dp"
+            android:background="@android:color/transparent"
+            android:onClick="@{callback::onClickPlantImage}"
+            android:src="@mipmap/flower" />
+
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:backgroundTint="@android:color/white"
+            android:layout_margin="8dp"
+            android:ems="10"
+            android:hint="@string/plant_name"
+            android:inputType="textNoSuggestions"
+            android:padding="10dp"
+            android:textSize="14sp"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white" />
+
+        <EditText
+            android:id="@+id/etDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:textSize="14sp"
+            android:textColorHint="@android:color/white"
+            android:padding="10dp"
+            android:textColor="@android:color/white"
+            android:layout_below="@+id/btnCreateAlarm"
+            android:backgroundTint="@android:color/white"
+            android:layout_margin="8dp"
+            android:ems="10"
+            android:hint="@string/write_description"
+            android:inputType="textNoSuggestions"/>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:layout_marginLeft="10dp"
+            android:text="@string/water_alarm" />
+
+        <Spinner
+            android:id="@+id/spinner_water"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/spinner_style"
+            android:paddingLeft="20dp"
+            android:drawableLeft="@mipmap/drop"
+            android:layout_marginTop="10dp" />
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="10dp"
+            android:text="Aydınlatma Alarmı" />
+
+        <Spinner
+            android:id="@+id/spinner_sun"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            style="@style/spinner_style"
+            android:layout_marginTop="10dp" />
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:background="@drawable/button_bg"
+            android:onClick="@{callback::onClickSave}"
+            android:text="KAYDET" />
+
+    </LinearLayout>
+</layout>

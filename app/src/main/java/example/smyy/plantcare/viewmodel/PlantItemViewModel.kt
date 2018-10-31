@@ -4,7 +4,7 @@ import android.view.View
 import androidx.databinding.ObservableField
 import example.smyy.plantcare.data.model.db.Plant
 
-class PlantItemViewModel (private val plant: Plant, private val listener: PlantItemViewModelListener?) {
+class PlantItemViewModel(private val plant: Plant, private val listener: PlantItemViewModelListener?) {
 
     var name: ObservableField<String>
 
@@ -20,7 +20,10 @@ class PlantItemViewModel (private val plant: Plant, private val listener: PlantI
 
     var ImageUrl: ObservableField<String>
 
+
+
     init {
+
         name = ObservableField(plant.name)
         description = ObservableField(plant.description)
         ImageUrl = ObservableField(plant.ImageUrl)
@@ -28,17 +31,15 @@ class PlantItemViewModel (private val plant: Plant, private val listener: PlantI
         fertilizierTime = ObservableField(plant.fertilizierTime)
         wateringInterval = ObservableField(plant.wateringInterval)
         wateringTime = ObservableField(plant.wateringTime)
+
     }
 
-    fun onClickImage(view: View) {
-        listener?.onClickImage()
-    }
     fun onItemClick(view: View) {
-        listener?.onItemClick(plant.plantId)
+        listener?.onItemClick(plant)
     }
+
     interface PlantItemViewModelListener {
 
-        fun onClickImage()
-        fun onItemClick(plantId: Int)
+        fun onItemClick(plant: Plant)
     }
 }

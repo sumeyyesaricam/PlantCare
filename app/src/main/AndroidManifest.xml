@@ -11,14 +11,13 @@
         android:supportsRtl="true"
         android:largeHeap="true"
         android:theme="@style/AppTheme">
-        <activity android:name="example.smyy.plantcare.ui.plantlist.PlantListActivity">
+        <activity android:name="example.smyy.plantcare.ui.plant.PlantListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="example.smyy.plantcare.ui.addplant.AddPlantActivity" />
     </application>
 
 </manifest>
