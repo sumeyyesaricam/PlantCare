@@ -29,6 +29,7 @@ class AddPlantFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentAddPlantBinding.inflate(inflater, container, false)
         subscribeUi()
+        //binding.spinner_water
         binding.callback = object : AddCallback {
 
             override fun onClickSave(view: View) {
