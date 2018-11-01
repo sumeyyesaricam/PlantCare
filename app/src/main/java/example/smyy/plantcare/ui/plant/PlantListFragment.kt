@@ -26,7 +26,7 @@ class PlantListFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentPlantListBinding.inflate(inflater, container, false)
-        binding.plantActivity= activity as PlantListActivity?
+        binding.plantActivity= activity as PlantListActivity
         binding.rvPlants.layoutManager = LinearLayoutManager(binding.root.context)
         subscribeUi(binding)
         return binding.root
@@ -41,7 +41,7 @@ class PlantListFragment : Fragment() {
         plantViewModel.getPlants().observe(this, Observer { plantList ->
             val adapter = PlantAdapter()
             binding.rvPlants.adapter = adapter
-            plantList?.let { adapter.setPlants(it) }
+            plantList.let { adapter.setPlants(it) }
         })
     }
 

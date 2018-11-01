@@ -1,6 +1,7 @@
 package example.smyy.plantcare.ui.plant
 
 import android.R
+import android.app.TimePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -19,6 +20,8 @@ import example.smyy.plantcare.util.Config
 import example.smyy.plantcare.util.ViewModelFactory
 import example.smyy.plantcare.viewmodel.PlantItemViewModel
 import example.smyy.plantcare.viewmodel.PlantViewModel
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 
@@ -48,6 +51,26 @@ class PlantDetailFragment : Fragment() {
         subscribeUi()
         binding.spinnerWater.adapter= ArrayAdapter(binding.root.context, R.layout.simple_spinner_item, (1..10).toList())
         binding.spinnerSun.adapter= ArrayAdapter(binding.root.context, R.layout.simple_spinner_item, (1..10).toList())
+        val cal = Calendar.getInstance()
+
+        val timeWaterSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
+            cal.set(Calendar.HOUR_OF_DAY, hour)
+            cal.set(Calendar.MINUTE, minute)
+            binding.btnWaterAlarm.text = SimpleDateFormat("HH:mm").format(cal.time)
+
+        }
+        val timeSunSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
+            cal.set(Calendar.HOUR_OF_DAY, hour)
+            cal.set(Calendar.MINUTE, minute)
+            binding.btnSunAlarm.text = SimpleDateFormat("HH:mm").format(cal.time)
+
+        }
+        binding.btnSunAlarm.setOnClickListener {
+            TimePickerDialog(context, timeSunSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
+        }
+        binding.btnWaterAlarm.setOnClickListener {
+            TimePickerDialog(context, timeWaterSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
+        }
         binding.viewmodel = PlantItemViewModel(plant, null)
         binding.callback = object : DetailCallback {
             override fun onClickPlantImage(view: View) {
@@ -63,7 +86,11 @@ class PlantDetailFragment : Fragment() {
             override fun onClickEdit(view: View) {
                 val name = binding.etName.text.toString()
                 val description = binding.etDescription.text.toString()
-                val item = Plant(name, description, 1, 2, 2, 2, "")
+                val waterInterval=binding.spinnerWater.selectedItem
+                val sunInterval=binding.spinnerSun.selectedItem
+                val waterTime=binding.btnWaterAlarm.text.toString()
+                val sunTime=binding.btnSunAlarm.text.toString()
+                val item = Plant(name, description, waterInterval as Int, sunInterval as Int, waterTime, sunTime, "")
                 item.plantId = plant.plantId
                 plantViewModel.updatePlant(item)
                 showFragment()

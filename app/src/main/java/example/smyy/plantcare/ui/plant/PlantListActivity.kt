@@ -34,13 +34,10 @@ class PlantListActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
     fun onClickAddPlant(view: View) {
         val fragment = AddPlantFragment()
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment, AddPlantFragment_TAG)
-                .addToBackStack(null).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment, AddPlantFragment_TAG).commit()
 
     }
     fun showFragment(fragment:Fragment,tag:String) {
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment, tag)
-                .addToBackStack(null).commit()
-
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment, tag).commit()
     }
 }

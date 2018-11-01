@@ -10,15 +10,15 @@ import java.util.*
 @Entity(tableName = "plants")
 data class Plant( var name:String,
                  var description:String, var wateringInterval:Int, var sunInterval:Int,
-                 var wateringTime:Int, var sunTime:Int,
+                 var wateringTime:String, var sunTime:String,
                  val ImageUrl:String="") : Parcelable {
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(name)
         parcel.writeString(description)
         parcel.writeInt(wateringInterval)
         parcel.writeInt(sunInterval)
-        parcel.writeInt(wateringTime)
-        parcel.writeInt(sunTime)
+        parcel.writeString(wateringTime)
+        parcel.writeString(sunTime)
         parcel.writeString(ImageUrl)
     }
 
@@ -30,8 +30,8 @@ data class Plant( var name:String,
             parcel.readString(),
             parcel.readInt(),
             parcel.readInt(),
-            parcel.readInt(),
-            parcel.readInt(),
+            parcel.readString(),
+            parcel.readString(),
             parcel.readString()) {
         plantId = parcel.readInt()
     }

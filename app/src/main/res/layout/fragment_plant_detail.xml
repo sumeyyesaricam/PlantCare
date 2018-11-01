@@ -85,12 +85,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:padding="10dp"
+                android:selectedItemPosition="@={viewmodel.wateringInterval}"
                 android:textColor="@android:color/white"
                 android:theme="@style/AppTheme" />
 
 
             <Button
-                android:id="@+id/button33"
+                android:id="@+id/btnWaterAlarm"
                 android:layout_width="wrap_content"
                 android:layout_height="35dp"
                 android:layout_margin="8dp"
@@ -98,7 +99,7 @@
                 android:background="@drawable/button_bg"
                 android:drawableLeft="@mipmap/alarm"
                 android:paddingLeft="8dp"
-                android:text="11:00"
+                android:text="@={viewmodel.wateringTime}"
                 android:textColor="@android:color/white" />
         </LinearLayout>
         <LinearLayout
@@ -122,12 +123,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:padding="10dp"
+                android:selectedItemPosition="@={viewmodel.sunInterval}"
                 android:textColor="@android:color/white"
                 android:theme="@style/AppTheme" />
 
 
             <Button
-                android:id="@+id/button34"
+                android:id="@+id/btnSunAlarm"
                 android:layout_width="wrap_content"
                 android:layout_height="35dp"
                 android:layout_margin="8dp"
@@ -135,7 +137,7 @@
                 android:background="@drawable/button_bg"
                 android:drawableLeft="@mipmap/alarm"
                 android:paddingLeft="8dp"
-                android:text="11:00"
+                android:text="@={viewmodel.sunTime}"
                 android:textColor="@android:color/white" />
         </LinearLayout>
 

@@ -6,7 +6,7 @@
     <string name="plant_name">Bitki Adı</string>
     <string name="water_alarm">Su Alarmı</string>
 
-    <string name="write_description">Açıklama Yaz..</string>
+    <string name="write_description">Not Ekle</string>
     <string-array name="array_day">
         <item>1 Günde</item>
         <item>2 Günde</item>

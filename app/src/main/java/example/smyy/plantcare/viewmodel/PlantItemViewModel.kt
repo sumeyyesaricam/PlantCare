@@ -8,10 +8,10 @@ class PlantItemViewModel(var plant: Plant, private val listener: PlantItemViewMo
                          val name :ObservableField<String> = ObservableField(plant.name),
                          val description:ObservableField<String> = ObservableField(plant.description),
                          val ImageUrl:ObservableField<String> = ObservableField(plant.ImageUrl),
-                         val fertilizerInterval:ObservableField<Int> = ObservableField(plant.sunInterval),
-                         val fertilizierTime :ObservableField<Int> = ObservableField(plant.sunTime),
+                         val sunInterval:ObservableField<Int> = ObservableField(plant.sunInterval),
+                         val sunTime :ObservableField<String> = ObservableField(plant.sunTime),
                          val wateringInterval:ObservableField<Int> = ObservableField(plant.wateringInterval),
-                         val wateringTime:ObservableField<Int> = ObservableField(plant.wateringTime)) {
+                         val wateringTime:ObservableField<String> = ObservableField(plant.wateringTime)) {
 
     fun onItemClick(view: View) {
         listener?.onItemClick(plant)

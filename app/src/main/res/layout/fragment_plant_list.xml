@@ -34,7 +34,7 @@
             android:layout_marginLeft="20dp"
             android:onClick="@{plantActivity::onClickAddPlant}"
             android:src="@mipmap/add"
-            app:backgroundTint="@color/colorPrimaryDark"
+            app:backgroundTint="@color/colorPrimary"
             app:fabCustomSize="50dp" />
     </FrameLayout>
 </layout>
