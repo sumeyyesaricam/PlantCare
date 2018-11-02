@@ -8,7 +8,7 @@ import androidx.room.TypeConverters
 import example.smyy.plantcare.data.dao.PlantDao
 import example.smyy.plantcare.data.model.db.Plant
 
-@Database(entities = [Plant::class], version = 4, exportSchema = false)
+@Database(entities = [Plant::class], version = 5, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
 

@@ -1,15 +1,25 @@
 package example.smyy.plantcare.ui.plant
 
+import android.Manifest
 import android.R
+import android.app.AlertDialog
 import android.app.TimePickerDialog
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.media.MediaScannerConnection
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
+import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import dagger.android.support.AndroidSupportInjection
@@ -17,9 +27,14 @@ import example.smyy.plantcare.data.model.db.Plant
 import example.smyy.plantcare.databinding.FragmentPlantDetailBinding
 import example.smyy.plantcare.ui.DetailCallback
 import example.smyy.plantcare.util.Config
+import example.smyy.plantcare.util.Config.Companion.MY_CAMERA_PERMISSION_CODE
 import example.smyy.plantcare.util.ViewModelFactory
 import example.smyy.plantcare.viewmodel.PlantItemViewModel
 import example.smyy.plantcare.viewmodel.PlantViewModel
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -29,6 +44,11 @@ class PlantDetailFragment : Fragment() {
 
 
     private lateinit var plantViewModel: PlantViewModel
+
+    private lateinit var binding: FragmentPlantDetailBinding
+
+    private var path: String = ""
+
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -47,10 +67,16 @@ class PlantDetailFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        val binding = FragmentPlantDetailBinding.inflate(inflater, container, false)
+        binding = FragmentPlantDetailBinding.inflate(inflater, container, false)
         subscribeUi()
-        binding.spinnerWater.adapter= ArrayAdapter(binding.root.context, R.layout.simple_spinner_item, (1..10).toList())
-        binding.spinnerSun.adapter= ArrayAdapter(binding.root.context, R.layout.simple_spinner_item, (1..10).toList())
+        val imgFile = File(plant.ImageUrl)
+        if (imgFile.exists()) {
+            path=plant.ImageUrl
+            val myBitmap = BitmapFactory.decodeFile(imgFile.absolutePath)
+            binding.ImgPlant.setImageBitmap(myBitmap)
+        }
+        binding.spinnerWater.adapter = ArrayAdapter(binding.root.context, R.layout.simple_spinner_item, (1..10).toList())
+        binding.spinnerSun.adapter = ArrayAdapter(binding.root.context, R.layout.simple_spinner_item, (1..10).toList())
         val cal = Calendar.getInstance()
 
         val timeWaterSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
@@ -74,8 +100,7 @@ class PlantDetailFragment : Fragment() {
         binding.viewmodel = PlantItemViewModel(plant, null)
         binding.callback = object : DetailCallback {
             override fun onClickPlantImage(view: View) {
-                val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                startActivityForResult(intent, Config.REQUEST_CAMERA)
+                takePhotoFromCamera()
             }
 
             override fun onClickRemove(view: View) {
@@ -86,11 +111,11 @@ class PlantDetailFragment : Fragment() {
             override fun onClickEdit(view: View) {
                 val name = binding.etName.text.toString()
                 val description = binding.etDescription.text.toString()
-                val waterInterval=binding.spinnerWater.selectedItem
-                val sunInterval=binding.spinnerSun.selectedItem
-                val waterTime=binding.btnWaterAlarm.text.toString()
-                val sunTime=binding.btnSunAlarm.text.toString()
-                val item = Plant(name, description, waterInterval as Int, sunInterval as Int, waterTime, sunTime, "")
+                val waterInterval = binding.spinnerWater.selectedItem
+                val sunInterval = binding.spinnerSun.selectedItem
+                val waterTime = binding.btnWaterAlarm.text.toString()
+                val sunTime = binding.btnSunAlarm.text.toString()
+                val item = Plant(name, description, waterInterval as Int, sunInterval as Int, waterTime, sunTime, path)
                 item.plantId = plant.plantId
                 plantViewModel.updatePlant(item)
                 showFragment()
@@ -100,8 +125,14 @@ class PlantDetailFragment : Fragment() {
         return binding.root
     }
 
+
+    private fun takePhotoFromCamera() {
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        startActivityForResult(intent, Config.REQUEST_CAMERA)
+    }
+
     fun showFragment() {
-        var activity = activity as PlantListActivity
+        val activity = activity as PlantListActivity
         val fragment = PlantListFragment()
         activity.showFragment(fragment, Config.PlantListFragment_TAG)
     }
@@ -120,11 +151,46 @@ class PlantDetailFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == Config.REQUEST_CAMERA) {
+            val thumbnail = data!!.extras!!.get("data") as Bitmap
+            binding.ImgPlant.setImageBitmap(thumbnail)
+            path = saveImage(thumbnail)
+        }
+    }
+
+    fun saveImage(myBitmap: Bitmap): String {
+        val bytes = ByteArrayOutputStream()
+        myBitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes)
+        val wallpaperDirectory = File((Environment.getExternalStorageDirectory()).toString() + "/plantcare")
+        if (!wallpaperDirectory.exists()) {
+            wallpaperDirectory.mkdirs()
+        }
+
+        try {
+            val f = File(wallpaperDirectory, ((Calendar.getInstance()
+                    .getTimeInMillis()).toString() + ".jpg"))
+            f.createNewFile()
+            val fo = FileOutputStream(f)
+            fo.write(bytes.toByteArray())
+            MediaScannerConnection.scanFile(context,
+                    arrayOf(f.getPath()),
+                    arrayOf("image/jpeg"), null)
+            fo.close()
+            Log.d("TAG", "File Saved::--->" + f.getAbsolutePath())
+
+            return f.getAbsolutePath()
+        } catch (e1: Exception) {
+            e1.printStackTrace()
+        }
+
+        return ""
     }
 
     private fun subscribeUi() {
         plantViewModel = ViewModelProviders.of(this, viewModelFactory).get(PlantViewModel::class.java)
 
     }
+
+
 }
 

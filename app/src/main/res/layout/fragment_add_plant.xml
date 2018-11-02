@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="callback"
             type="example.smyy.plantcare.ui.AddCallback" />
@@ -12,144 +13,152 @@
             type="example.smyy.plantcare.viewmodel.PlantItemViewModel" />
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/plant_back"
         android:orientation="vertical">
 
-        <ImageButton
-            android:id="@+id/ImgPlant"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="75dp"
-            android:background="@android:color/transparent"
-            android:onClick="@{callback::onClickPlantImage}"
-            android:src="@mipmap/flower" />
-
-        <EditText
-            android:id="@+id/etName"
-            android:layout_width="227dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:layout_gravity="center"
-            android:layout_margin="8dp"
-            android:backgroundTint="@android:color/white"
-            android:ems="10"
-            android:hint="@string/plant_name"
-            android:inputType="textNoSuggestions"
-            android:padding="10dp"
-            android:textColor="@android:color/white"
-            android:textColorHint="@color/white_transparent" />
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:background="@drawable/plant_back"
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="36dp"
-                android:layout_height="21dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="8dp"
-                android:layout_weight="1"
-                app:srcCompat="@mipmap/drop" />
-
-            <Spinner
-                android:id="@+id/spinner_water"
-                style="@style/spinner_style"
-                android:layout_width="232dp"
+            <ImageButton
+                android:id="@+id/ImgPlant"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="75dp"
+                android:background="@android:color/transparent"
+                android:onClick="@{callback::onClickPlantImage}"
+                android:src="@mipmap/flower" />
+
+            <EditText
+                android:id="@+id/etName"
+                android:layout_width="227dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
+                android:backgroundTint="@android:color/white"
+                android:ems="10"
+                android:hint="@string/plant_name"
+                android:inputType="textNoSuggestions"
                 android:padding="10dp"
                 android:textColor="@android:color/white"
-                android:theme="@style/AppTheme" />
+                android:textColorHint="@color/white_transparent" />
 
-            <Button
-                android:id="@+id/btnWateringAlarm"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_margin="8dp"
-                android:layout_weight="1"
-                android:background="@drawable/button_bg"
-                android:drawableLeft="@mipmap/alarm"
-                android:paddingLeft="8dp"
-                android:text="11:00"
-                android:textColor="@android:color/white" />
-
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="36dp"
-                android:layout_height="21dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="8dp"
-                android:layout_weight="1"
-                app:srcCompat="@mipmap/sun_white" />
-
-            <Spinner
-                android:id="@+id/spinner_sun"
-                style="@style/spinner_style"
-                android:layout_width="237dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="36dp"
+                    android:layout_height="21dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight="1"
+                    app:srcCompat="@mipmap/drop" />
+
+                <Spinner
+                    android:id="@+id/spinner_water"
+                    style="@style/spinner_style"
+                    android:layout_width="232dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:padding="10dp"
+                    android:textColor="@android:color/white"
+                    android:theme="@style/AppTheme" />
+
+                <Button
+                    android:id="@+id/btnWateringAlarm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_margin="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_bg"
+                    android:drawableLeft="@mipmap/alarm_white"
+                    android:paddingLeft="8dp"
+                    android:text="11:00"
+                    android:textColor="@android:color/white" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="36dp"
+                    android:layout_height="21dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight="1"
+                    app:srcCompat="@mipmap/sun_white" />
+
+                <Spinner
+                    android:id="@+id/spinner_sun"
+                    style="@style/spinner_style"
+                    android:layout_width="237dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:padding="10dp"
+                    android:textColor="@android:color/white"
+                    android:theme="@style/AppTheme" />
+
+                <Button
+                    android:id="@+id/btnSunningAlarm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_margin="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_bg"
+                    android:drawableLeft="@mipmap/alarm_white"
+                    android:paddingLeft="8dp"
+                    android:text="11:00"
+                    android:textColor="@android:color/white" />
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/etDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true"
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
+                android:backgroundTint="@android:color/white"
+                android:ems="10"
+                android:hint="@string/write_description"
+                android:inputType="textNoSuggestions"
                 android:padding="10dp"
                 android:textColor="@android:color/white"
-                android:theme="@style/AppTheme" />
+                android:textColorHint="@color/white_transparent" />
 
             <Button
-                android:id="@+id/btnSunningAlarm"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_margin="8dp"
-                android:layout_weight="1"
-                android:background="@drawable/button_bg"
-                android:drawableLeft="@mipmap/alarm"
-                android:paddingLeft="8dp"
-                android:text="11:00"
+                android:id="@+id/button"
+                android:layout_width="231dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/btn_bg"
+                android:drawableLeft="@mipmap/save_white"
+                android:onClick="@{callback::onClickSave}"
+                android:padding="8dp"
+                android:text="KAYDET"
                 android:textColor="@android:color/white" />
 
         </LinearLayout>
-
-        <EditText
-            android:id="@+id/etDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentStart="true"
-            android:layout_gravity="center"
-            android:layout_margin="8dp"
-            android:backgroundTint="@android:color/white"
-            android:ems="10"
-            android:hint="@string/write_description"
-            android:inputType="textNoSuggestions"
-            android:padding="10dp"
-            android:textColor="@android:color/white"
-            android:textColorHint="@color/white_transparent"/>
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="231dp"
-            android:layout_height="34dp"
-            android:layout_gravity="end"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:background="#8c4e35"
-            android:drawableLeft="@mipmap/save_white"
-            android:onClick="@{callback::onClickSave}"
-            android:padding="8dp"
-            android:text="KAYDET"
-            android:textColor="@android:color/white" />
-
-    </LinearLayout>
+    </RelativeLayout>
 </layout>

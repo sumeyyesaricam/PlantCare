@@ -9,6 +9,8 @@ class Config{
         val PlantDetailFragment_TAG: String = "PlantDetailFragment_TAG"
         val EXTRA_PLANT= "EXTRA_PLANT"
         val REQUEST_CAMERA=1000
+        val REQUEST_GALLERY=2000
+        val MY_CAMERA_PERMISSION_CODE = 100
     }
 
 }

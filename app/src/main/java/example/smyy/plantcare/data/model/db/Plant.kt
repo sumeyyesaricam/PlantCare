@@ -11,7 +11,7 @@ import java.util.*
 data class Plant( var name:String,
                  var description:String, var wateringInterval:Int, var sunInterval:Int,
                  var wateringTime:String, var sunTime:String,
-                 val ImageUrl:String="") : Parcelable {
+                 val ImageUrl:String="", var createdDate: Date=Date()) : Parcelable {
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(name)
         parcel.writeString(description)

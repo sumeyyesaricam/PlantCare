@@ -18,7 +18,7 @@
         android:background="@drawable/plant_back"
         android:orientation="vertical">
 
-        <ImageButton
+        <ImageView
             android:id="@+id/ImgPlant"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -43,26 +43,7 @@
             android:padding="10dp"
             android:text="@{viewmodel.name}"
             android:textColor="@android:color/white"
-            android:textColorHint="@android:color/white" />
-
-        <EditText
-            android:id="@+id/etDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/btnCreateAlarm"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_gravity="center"
-            android:layout_margin="8dp"
-            android:backgroundTint="@android:color/white"
-            android:ems="10"
-            android:hint="@string/write_description"
-            android:inputType="textNoSuggestions"
-            android:padding="10dp"
-            android:text="@{viewmodel.description}"
-            android:textColor="@android:color/white"
-            android:textColorHint="@android:color/white" />
+            android:textColorHint="@color/white_transparent"  />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -97,7 +78,7 @@
                 android:layout_margin="8dp"
                 android:layout_weight="1"
                 android:background="@drawable/button_bg"
-                android:drawableLeft="@mipmap/alarm"
+                android:drawableLeft="@mipmap/alarm_white"
                 android:paddingLeft="8dp"
                 android:text="@={viewmodel.wateringTime}"
                 android:textColor="@android:color/white" />
@@ -135,14 +116,33 @@
                 android:layout_margin="8dp"
                 android:layout_weight="1"
                 android:background="@drawable/button_bg"
-                android:drawableLeft="@mipmap/alarm"
+                android:drawableLeft="@mipmap/alarm_white"
                 android:paddingLeft="8dp"
                 android:text="@={viewmodel.sunTime}"
                 android:textColor="@android:color/white" />
         </LinearLayout>
 
 
-        <RelativeLayout
+        <EditText
+            android:id="@+id/etDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/btnCreateAlarm"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:backgroundTint="@android:color/white"
+            android:ems="10"
+            android:hint="@string/write_description"
+            android:inputType="textNoSuggestions"
+            android:padding="10dp"
+            android:text="@{viewmodel.description}"
+            android:textColor="@android:color/white"
+            android:textColorHint="@color/white_transparent" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="end"
@@ -152,16 +152,12 @@
 
             <Button
                 android:id="@+id/button"
-                android:layout_width="wrap_content"
+                android:layout_width="166dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="120dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/button_bg"
+                android:layout_margin="8dp"
+                android:background="@drawable/btn_bg"
                 android:drawableLeft="@mipmap/save_white"
+                android:gravity="center"
                 android:onClick="@{callback::onClickEdit}"
                 android:paddingLeft="8dp"
                 android:text="@string/save"
@@ -169,18 +165,17 @@
 
             <Button
                 android:id="@+id/button2"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_margin="10dp"
-                android:background="@drawable/button_bg"
+                android:layout_margin="8dp"
+                android:background="@drawable/btn_bg"
                 android:drawableLeft="@mipmap/remove"
+                android:gravity="center"
                 android:onClick="@{callback::onClickRemove}"
                 android:paddingLeft="8dp"
                 android:text="@string/remove"
                 android:textColor="@android:color/white" />
-        </RelativeLayout>
+        </LinearLayout>
 
     </LinearLayout>
 </layout>

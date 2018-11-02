@@ -7,6 +7,7 @@
     <string name="water_alarm">Su Alarmı</string>
 
     <string name="write_description">Not Ekle</string>
+    <string name="add_image">Resim Ekle</string>
     <string-array name="array_day">
         <item>1 Günde</item>
         <item>2 Günde</item>
