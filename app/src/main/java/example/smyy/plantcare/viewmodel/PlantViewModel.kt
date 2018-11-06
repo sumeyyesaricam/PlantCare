@@ -1,6 +1,7 @@
 package example.smyy.plantcare.viewmodel
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import example.smyy.plantcare.data.model.db.Plant
 import example.smyy.plantcare.data.repository.PlantRepository
@@ -13,8 +14,26 @@ class PlantViewModel @Inject constructor(private val plantRepository: PlantRepos
 
     private val disposable = CompositeDisposable()
 
+    private val plantsLiveData: MutableLiveData<List<Plant>> = MutableLiveData<List<Plant>>()
     fun getPlants()= plantRepository.getPlants()
 
+    fun getPlantRepos(): MutableLiveData<List<Plant>> {
+        return plantsLiveData
+    }
+
+    fun apiGetPlants(){
+        disposable.add(plantRepository.apiGetPlants()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({plant->
+                    if (plant != null) {
+                        plantsLiveData.value = plant
+                    }
+
+                },{
+                    Log.d("Error insert", it.message)
+                }))
+    }
 
     fun insertPlant(plant: Plant) :Unit{
         disposable.add(plantRepository.insertPlant(plant)

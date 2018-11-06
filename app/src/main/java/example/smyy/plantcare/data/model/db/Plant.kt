@@ -5,8 +5,10 @@ import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.firebase.database.IgnoreExtraProperties
 import java.util.*
 
+@IgnoreExtraProperties
 @Entity(tableName = "plants")
 data class Plant( var name:String,
                  var description:String, var wateringInterval:Int, var sunInterval:Int,

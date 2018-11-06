@@ -5,6 +5,7 @@ import dagger.android.ContributesAndroidInjector
 import example.smyy.plantcare.ui.plant.AddPlantFragment
 import example.smyy.plantcare.ui.plant.PlantDetailFragment
 import example.smyy.plantcare.ui.plant.PlantListFragment
+import example.smyy.plantcare.ui.plant.PublishedPlantsFragment
 
 @Suppress("unused")
 @Module
@@ -18,4 +19,7 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributePlantDetailFragment(): PlantDetailFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributePublishedPlantsFragment(): PublishedPlantsFragment
 }

@@ -5,6 +5,8 @@
     <string name="remove">SİL</string>
     <string name="plant_name">Bitki Adı</string>
     <string name="water_alarm">Su Alarmı</string>
+    <string name="my_plant">Benim Bitkilerim</string>
+    <string name="published_plant">Yayınlanan Bitkiler</string>
 
     <string name="write_description">Not Ekle</string>
     <string name="add_image">Resim Ekle</string>

@@ -98,4 +98,8 @@ class AddPlantFragment : Fragment() {
         plantViewModel = ViewModelProviders.of(this, viewModelFactory).get(PlantViewModel::class.java)
 
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+    }
 }

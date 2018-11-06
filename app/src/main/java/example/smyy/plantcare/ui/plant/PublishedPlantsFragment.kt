@@ -6,21 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.android.support.AndroidSupportInjection
 import example.smyy.plantcare.R
-import example.smyy.plantcare.data.model.db.Plant
 import example.smyy.plantcare.databinding.FragmentPlantListBinding
 import example.smyy.plantcare.util.Config
 import example.smyy.plantcare.util.ViewModelFactory
 import example.smyy.plantcare.viewmodel.PlantViewModel
 import javax.inject.Inject
 
-class PlantListFragment : Fragment() {
+class PublishedPlantsFragment : Fragment() {
 
 
     private lateinit var plantViewModel: PlantViewModel
@@ -41,7 +37,8 @@ class PlantListFragment : Fragment() {
 
     private fun subscribeUi(binding: FragmentPlantListBinding) {
         plantViewModel = ViewModelProviders.of(this, viewModelFactory).get(PlantViewModel::class.java)
-        plantViewModel.getPlants().observe(viewLifecycleOwner, Observer { plantList ->
+        plantViewModel.apiGetPlants()
+        plantViewModel.getPlantRepos().observe(viewLifecycleOwner, Observer { plantList ->
             val adapter = PlantAdapter()
             binding.rvPlants.adapter = adapter
             plantList.let { adapter.setPlants(it) }

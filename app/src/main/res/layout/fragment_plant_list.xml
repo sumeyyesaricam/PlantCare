@@ -5,9 +5,6 @@
 
     <data>
 
-        <variable
-            name="plantActivity"
-            type="example.smyy.plantcare.ui.plant.PlantListActivity" />
     </data>
 
     <FrameLayout
@@ -19,20 +16,21 @@
             android:id="@+id/rvPlants"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            tools:context="example.smyy.plantcare.ui.plant.PlantListActivity"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_plant">
 
         </androidx.recyclerview.widget.RecyclerView>
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_bar"
+            android:id="@+id/fabBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
             android:layout_marginBottom="21dp"
             android:layout_marginEnd="22dp"
             android:layout_marginLeft="20dp"
-            android:onClick="@{plantActivity::onClickAddPlant}"
             android:src="@mipmap/add"
             app:backgroundTint="@color/colorPrimary"
             app:fabCustomSize="50dp" />

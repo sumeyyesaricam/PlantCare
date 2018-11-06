@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import example.smyy.plantcare.data.AppDatabase
 import example.smyy.plantcare.data.dao.PlantDao
 import example.smyy.plantcare.data.model.db.Plant
+import example.smyy.plantcare.data.remote.ApiHelper
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -11,7 +12,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class PlantRepository  @Inject constructor (private val appDatabase: AppDatabase) {
+class PlantRepository  @Inject constructor (private val appDatabase: AppDatabase,private val apiHelper: ApiHelper) {
 
     fun getPlants() = appDatabase.plantDao().loadAll()
 
@@ -28,5 +29,7 @@ class PlantRepository  @Inject constructor (private val appDatabase: AppDatabase
     }
 
     fun getPlant(plantId: Int)= appDatabase.plantDao().getPlant(plantId)
+
+    fun apiGetPlants(): Single<List<Plant>>  =  apiHelper.doServerGetPlants()
 
 }

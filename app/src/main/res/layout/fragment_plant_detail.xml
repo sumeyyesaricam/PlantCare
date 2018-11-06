@@ -23,19 +23,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="75dp"
+            android:layout_marginTop="45dp"
             android:background="@android:color/transparent"
             android:onClick="@{callback::onClickPlantImage}"
-            android:src="@mipmap/flower" />
+            android:src="@mipmap/plant" />
 
         <EditText
             android:id="@+id/etName"
-            android:layout_width="wrap_content"
+            android:layout_width="251dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
             android:layout_gravity="center"
-            android:layout_margin="8dp"
+            android:layout_margin="5dp"
             android:backgroundTint="@android:color/white"
             android:ems="10"
             android:hint="@string/plant_name"
@@ -43,7 +43,7 @@
             android:padding="10dp"
             android:text="@{viewmodel.name}"
             android:textColor="@android:color/white"
-            android:textColorHint="@color/white_transparent"  />
+            android:textColorHint="@color/white_transparent" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -52,28 +52,27 @@
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="36dp"
-                android:layout_height="21dp"
+                android:layout_width="wrap_content"
+                android:layout_height="22dp"
                 android:layout_gravity="center"
-                android:layout_marginLeft="8dp"
+                android:layout_marginLeft="15dp"
                 android:layout_weight="1"
                 app:srcCompat="@mipmap/drop" />
 
             <Spinner
                 android:id="@+id/spinnerWater"
                 style="@style/spinner_style"
-                android:layout_width="231dp"
+                android:layout_width="232dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:padding="10dp"
-                android:selectedItemPosition="@={viewmodel.wateringInterval}"
                 android:textColor="@android:color/white"
                 android:theme="@style/AppTheme" />
 
 
             <Button
                 android:id="@+id/btnWaterAlarm"
-                android:layout_width="wrap_content"
+                android:layout_width="51dp"
                 android:layout_height="35dp"
                 android:layout_margin="8dp"
                 android:layout_weight="1"
@@ -83,6 +82,7 @@
                 android:text="@={viewmodel.wateringTime}"
                 android:textColor="@android:color/white" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -90,10 +90,10 @@
 
             <ImageView
                 android:id="@+id/imageView3"
-                android:layout_width="36dp"
-                android:layout_height="21dp"
+                android:layout_width="wrap_content"
+                android:layout_height="22dp"
                 android:layout_gravity="center"
-                android:layout_marginLeft="8dp"
+                android:layout_marginLeft="15dp"
                 android:layout_weight="1"
                 app:srcCompat="@mipmap/sun_white" />
 
@@ -104,14 +104,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:padding="10dp"
-                android:selectedItemPosition="@={viewmodel.sunInterval}"
                 android:textColor="@android:color/white"
                 android:theme="@style/AppTheme" />
 
 
             <Button
                 android:id="@+id/btnSunAlarm"
-                android:layout_width="wrap_content"
+                android:layout_width="51dp"
                 android:layout_height="35dp"
                 android:layout_margin="8dp"
                 android:layout_weight="1"
@@ -125,7 +124,7 @@
 
         <EditText
             android:id="@+id/etDescription"
-            android:layout_width="match_parent"
+            android:layout_width="340dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
@@ -137,42 +136,37 @@
             android:ems="10"
             android:hint="@string/write_description"
             android:inputType="textNoSuggestions"
-            android:padding="10dp"
+            android:padding="8dp"
             android:text="@{viewmodel.description}"
             android:textColor="@android:color/white"
             android:textColorHint="@color/white_transparent" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="end"
-            android:layout_marginTop="10dp"
-            android:gravity="bottom|end"
-            android:orientation="horizontal">
+            android:layout_height="101dp"
+            android:layout_gravity="center"
+            android:gravity="bottom|center_vertical|center_horizontal|end"
+            android:orientation="horizontal"
+            android:paddingEnd="25dp">
 
             <Button
                 android:id="@+id/button"
-                android:layout_width="166dp"
+                android:layout_width="143dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:background="@drawable/btn_bg"
-                android:drawableLeft="@mipmap/save_white"
-                android:gravity="center"
+                android:gravity="center_vertical|center"
                 android:onClick="@{callback::onClickEdit}"
-                android:paddingLeft="8dp"
                 android:text="@string/save"
                 android:textColor="@android:color/white" />
 
             <Button
                 android:id="@+id/button2"
-                android:layout_width="match_parent"
+                android:layout_width="143dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:background="@drawable/btn_bg"
-                android:drawableLeft="@mipmap/remove"
-                android:gravity="center"
                 android:onClick="@{callback::onClickRemove}"
-                android:paddingLeft="8dp"
                 android:text="@string/remove"
                 android:textColor="@android:color/white" />
         </LinearLayout>

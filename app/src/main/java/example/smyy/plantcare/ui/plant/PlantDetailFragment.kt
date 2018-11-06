@@ -22,6 +22,8 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import dagger.android.support.AndroidSupportInjection
 import example.smyy.plantcare.data.model.db.Plant
 import example.smyy.plantcare.databinding.FragmentPlantDetailBinding
@@ -31,6 +33,7 @@ import example.smyy.plantcare.util.Config.Companion.MY_CAMERA_PERMISSION_CODE
 import example.smyy.plantcare.util.ViewModelFactory
 import example.smyy.plantcare.viewmodel.PlantItemViewModel
 import example.smyy.plantcare.viewmodel.PlantViewModel
+import kotlinx.android.synthetic.main.fragment_plant_detail.*
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -44,8 +47,8 @@ class PlantDetailFragment : Fragment() {
 
 
     private lateinit var plantViewModel: PlantViewModel
-
-    private lateinit var binding: FragmentPlantDetailBinding
+    lateinit var mDatabase: DatabaseReference
+    lateinit var mPlantReference: DatabaseReference
 
     private var path: String = ""
 
@@ -67,7 +70,7 @@ class PlantDetailFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = FragmentPlantDetailBinding.inflate(inflater, container, false)
+        var binding = FragmentPlantDetailBinding.inflate(inflater, container, false)
         subscribeUi()
         val imgFile = File(plant.ImageUrl)
         if (imgFile.exists()) {
@@ -116,6 +119,10 @@ class PlantDetailFragment : Fragment() {
                 val waterTime = binding.btnWaterAlarm.text.toString()
                 val sunTime = binding.btnSunAlarm.text.toString()
                 val item = Plant(name, description, waterInterval as Int, sunInterval as Int, waterTime, sunTime, path)
+               // mPlantReference.setValue(item)
+                val newItem = mDatabase.child("plant").push()
+                newItem.setValue(item)
+
                 item.plantId = plant.plantId
                 plantViewModel.updatePlant(item)
                 showFragment()
@@ -142,6 +149,9 @@ class PlantDetailFragment : Fragment() {
         if (arguments != null) {
             plant = arguments!!.getParcelable(ARG_PARAM_PLANT)
         }
+        mDatabase = FirebaseDatabase.getInstance().reference
+        mPlantReference = FirebaseDatabase.getInstance().getReference("plant")
+
     }
 
     override fun onAttach(context: Context) {
@@ -153,7 +163,7 @@ class PlantDetailFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == Config.REQUEST_CAMERA) {
             val thumbnail = data!!.extras!!.get("data") as Bitmap
-            binding.ImgPlant.setImageBitmap(thumbnail)
+            ImgPlant.setImageBitmap(thumbnail)
             path = saveImage(thumbnail)
         }
     }

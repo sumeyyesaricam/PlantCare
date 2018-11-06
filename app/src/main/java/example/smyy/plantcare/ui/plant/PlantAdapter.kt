@@ -15,10 +15,9 @@ import java.io.File
 import java.nio.file.Files.exists
 
 
-
 class PlantAdapter : RecyclerView.Adapter<ViewHolder>() {
 
-    private lateinit var plants :List<Plant>
+    private lateinit var plants: List<Plant>
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(plants[position])
@@ -47,8 +46,8 @@ class ViewHolder(private val binding: ItemPlantBinding) : PlantItemViewModel.Pla
 
     override fun onItemClick(plant: Plant) {
         val fragment = PlantDetailFragment.newInstance(plant)
-        val activity=itemView.context as PlantListActivity
-        activity.showFragment(fragment,Config.PlantDetailFragment_TAG)
+        val activity = itemView.context as PlantListActivity
+        activity.showFragment(fragment, Config.PlantDetailFragment_TAG)
 
     }
 
@@ -58,11 +57,13 @@ class ViewHolder(private val binding: ItemPlantBinding) : PlantItemViewModel.Pla
             viewmodel = PlantItemViewModel(item, listener)
             executePendingBindings()
         }
-        val imgFile = File(item.ImageUrl)
+        if (item.ImageUrl != null) {
+            val imgFile = File(item.ImageUrl)
 
-        if (imgFile.exists()) {
-            val myBitmap = BitmapFactory.decodeFile(imgFile.absolutePath)
-            binding.ImagePlant.setImageBitmap(myBitmap)
+            if (imgFile.exists()) {
+                val myBitmap = BitmapFactory.decodeFile(imgFile.absolutePath)
+                binding.ImagePlant.setImageBitmap(myBitmap)
+            }
         }
 
     }
