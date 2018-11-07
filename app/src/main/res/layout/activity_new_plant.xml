@@ -3,6 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+
+        <import type="android.view.View" />
         <variable
             name="callback"
             type="example.smyy.plantcare.ui.DetailCallback" />
@@ -52,17 +54,16 @@
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="wrap_content"
+                android:layout_width="34dp"
                 android:layout_height="22dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="15dp"
-                android:layout_weight="1"
                 app:srcCompat="@mipmap/drop" />
 
             <Spinner
                 android:id="@+id/spinnerWater"
                 style="@style/spinner_style"
-                android:layout_width="232dp"
+                android:layout_width="221dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:padding="10dp"
@@ -72,10 +73,9 @@
 
             <Button
                 android:id="@+id/btnWaterAlarm"
-                android:layout_width="51dp"
+                android:layout_width="wrap_content"
                 android:layout_height="35dp"
                 android:layout_margin="8dp"
-                android:layout_weight="1"
                 android:background="@drawable/button_bg"
                 android:drawableLeft="@mipmap/alarm_white"
                 android:paddingLeft="8dp"
@@ -90,7 +90,7 @@
 
             <ImageView
                 android:id="@+id/imageView3"
-                android:layout_width="wrap_content"
+                android:layout_width="13dp"
                 android:layout_height="22dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="15dp"
@@ -100,7 +100,7 @@
             <Spinner
                 android:id="@+id/spinnerSun"
                 style="@style/spinner_style"
-                android:layout_width="232dp"
+                android:layout_width="223dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:padding="10dp"
@@ -161,13 +161,14 @@
                 android:textColor="@android:color/white" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/btnRemove"
                 android:layout_width="143dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:background="@drawable/btn_bg"
                 android:onClick="@{callback::onClickRemove}"
                 android:text="@string/remove"
+                android:visibility="@{viewmodel!=null ? View.VISIBLE : View.GONE}"
                 android:textColor="@android:color/white" />
         </LinearLayout>
 

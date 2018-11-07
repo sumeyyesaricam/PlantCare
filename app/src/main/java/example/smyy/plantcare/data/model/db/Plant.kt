@@ -5,12 +5,10 @@ import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.google.firebase.database.IgnoreExtraProperties
 import java.util.*
 
-@IgnoreExtraProperties
 @Entity(tableName = "plants")
-data class Plant( var name:String,
+data class Plant(var name:String,
                  var description:String, var wateringInterval:Int, var sunInterval:Int,
                  var wateringTime:String, var sunTime:String,
                  val ImageUrl:String="", var createdDate: Date=Date()) : Parcelable {
@@ -22,6 +20,7 @@ data class Plant( var name:String,
         parcel.writeString(wateringTime)
         parcel.writeString(sunTime)
         parcel.writeString(ImageUrl)
+        parcel.writeInt(plantId)
     }
 
     @PrimaryKey(autoGenerate = true)

@@ -1,5 +1,6 @@
 package example.smyy.plantcare.ui.plant
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -21,7 +22,6 @@ class PlantAdapter : RecyclerView.Adapter<ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(plants[position])
-
     }
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
@@ -45,9 +45,9 @@ class ViewHolder(private val binding: ItemPlantBinding) : PlantItemViewModel.Pla
     val listener = this
 
     override fun onItemClick(plant: Plant) {
-        val fragment = PlantDetailFragment.newInstance(plant)
-        val activity = itemView.context as PlantListActivity
-        activity.showFragment(fragment, Config.PlantDetailFragment_TAG)
+        val intent = Intent(itemView.context , NewPlantActivity::class.java)
+        intent.putExtra(Config.ARG_PARAM_PLANT, plant)
+        itemView.context.startActivity(intent)
 
     }
 
@@ -57,7 +57,7 @@ class ViewHolder(private val binding: ItemPlantBinding) : PlantItemViewModel.Pla
             viewmodel = PlantItemViewModel(item, listener)
             executePendingBindings()
         }
-        if (item.ImageUrl != null) {
+        if (item.ImageUrl != null && item.ImageUrl != "") {
             val imgFile = File(item.ImageUrl)
 
             if (imgFile.exists()) {

@@ -21,6 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="example.smyy.plantcare.ui.plant.NewPlantActivity">
+        </activity>
     </application>
 
 </manifest>

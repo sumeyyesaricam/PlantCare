@@ -2,8 +2,6 @@ package example.smyy.plantcare.di.builder
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
-import example.smyy.plantcare.ui.plant.AddPlantFragment
-import example.smyy.plantcare.ui.plant.PlantDetailFragment
 import example.smyy.plantcare.ui.plant.PlantListFragment
 import example.smyy.plantcare.ui.plant.PublishedPlantsFragment
 
@@ -13,12 +11,6 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributePlantListFragment(): PlantListFragment
-
-    @ContributesAndroidInjector
-    abstract fun contributeAddPlantFragment(): AddPlantFragment
-
-    @ContributesAndroidInjector
-    abstract fun contributePlantDetailFragment(): PlantDetailFragment
 
     @ContributesAndroidInjector
     abstract fun contributePublishedPlantsFragment(): PublishedPlantsFragment

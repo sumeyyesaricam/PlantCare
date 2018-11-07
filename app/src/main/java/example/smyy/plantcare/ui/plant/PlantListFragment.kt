@@ -1,6 +1,7 @@
 package example.smyy.plantcare.ui.plant
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -34,6 +35,7 @@ class PlantListFragment : Fragment() {
         subscribeUi(binding)
         return binding.root
     }
+
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
         super.onAttach(context)
@@ -48,10 +50,11 @@ class PlantListFragment : Fragment() {
         })
     }
 
-    private fun showAddPlantFragment(){
-        val fragment = AddPlantFragment()
-        fragmentManager!!.beginTransaction().replace(R.id.fragment_container, fragment, Config.AddPlantFragment_TAG).commit()
+    private fun showAddPlantFragment() {
+        val intent = Intent(context , NewPlantActivity::class.java)
+        activity?.startActivity(intent)
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
     }

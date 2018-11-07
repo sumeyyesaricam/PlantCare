@@ -1,5 +1,7 @@
 package example.smyy.plantcare.ui.plant
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import example.smyy.plantcare.R
 import javax.inject.Inject
@@ -48,12 +50,12 @@ class PlantListActivity : AppCompatActivity(), HasSupportFragmentInjector, Actio
         setupTabs()
     }
 
-    fun showFragment(fragment: Fragment, tag: String) {
+    private fun showFragment(fragment: Fragment, tag: String) {
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment, tag).commit()
     }
 
     private fun setupTabs() {
-        val actionBar = this@PlantListActivity.supportActionBar
+        val actionBar = supportActionBar
         actionBar!!.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS)
         val myPlantTab: ActionBar.Tab = actionBar.newTab().setText(R.string.my_plant).setTabListener(this)
         val addplantTab: ActionBar.Tab = actionBar.newTab().setText(R.string.published_plant).setTabListener(this)
