@@ -10,11 +10,13 @@ import example.smyy.plantcare.PlantApp
 import example.smyy.plantcare.di.builder.ActivityBuilder
 import example.smyy.plantcare.di.builder.FragmentBuildersModule
 import example.smyy.plantcare.di.module.AppModule
+import example.smyy.plantcare.di.module.PlantListModule
 import example.smyy.plantcare.di.module.ViewModelModule
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [AndroidInjectionModule::class, AndroidSupportInjectionModule::class,    AppModule::class,ActivityBuilder::class, ViewModelModule::class])
+@Component(modules = [AndroidInjectionModule::class, AndroidSupportInjectionModule::class,
+    PlantListModule::class,AppModule::class,ActivityBuilder::class, ViewModelModule::class])
 interface AppComponent: AndroidInjector<PlantApp> {
 
     fun inject(application: Application)

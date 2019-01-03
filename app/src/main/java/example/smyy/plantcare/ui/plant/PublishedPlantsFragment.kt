@@ -9,8 +9,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import dagger.android.support.AndroidSupportInjection
 import example.smyy.plantcare.R
+import example.smyy.plantcare.data.model.db.Plant
 import example.smyy.plantcare.databinding.FragmentPlantListBinding
 import example.smyy.plantcare.util.Config
 import example.smyy.plantcare.util.ViewModelFactory
@@ -19,11 +21,12 @@ import javax.inject.Inject
 
 class PublishedPlantsFragment : Fragment() {
 
-
     private lateinit var plantViewModel: PlantViewModel
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
+    @Inject
+    lateinit var plantAdapter: PlantAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentPlantListBinding.inflate(inflater, container, false)
@@ -40,15 +43,15 @@ class PublishedPlantsFragment : Fragment() {
         plantViewModel = ViewModelProviders.of(this, viewModelFactory).get(PlantViewModel::class.java)
         plantViewModel.apiGetPlants()
         plantViewModel.getPlantRepos().observe(viewLifecycleOwner, Observer { plantList ->
-            val adapter = PlantAdapter()
-            binding.rvPlants.adapter = adapter
-            plantList.let { adapter.setPlants(it) }
+            binding.rvPlants.adapter = plantAdapter
+            plantList.let { plantAdapter.setPlants(it,1) }
         })
 
     }
     private fun showAddPlantFragment() {
-        val intent = Intent(context , NewPlantActivity::class.java)
-        activity?.startActivity(intent)
+        val plant= Plant("","",0,0,"","")
+        val direction = PublishedPlantsFragmentDirections.actionPublishedPlantsFragmentToNewPlantActivity(plant)
+        findNavController().navigate(direction)
     }
 
 

@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import dagger.android.AndroidInjection
 import example.smyy.plantcare.R
 import example.smyy.plantcare.data.model.db.Plant
@@ -36,15 +37,18 @@ import javax.inject.Inject
 class NewPlantActivity : AppCompatActivity() {
 
     private lateinit var plantViewModel: PlantViewModel
-    var path: String=""
+    var path: String?=""
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-
+    lateinit var  binding: ActivityNewPlantBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding: ActivityNewPlantBinding = DataBindingUtil.setContentView(this, R.layout.activity_new_plant)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_new_plant)
         AndroidInjection.inject(this)
-        val mPlant: Plant? = intent.getParcelableExtra<Plant>(ARG_PARAM_PLANT)
+        val bundle=intent.extras
+        val arg = NewPlantActivityArgs.fromBundle(bundle)
+        val mPlant=arg.plant
+        //val mPlant: Plant? = intent.getParcelableExtra<Plant>(ARG_PARAM_PLANT)
         subscribeUi(binding, mPlant)
     }
 
@@ -74,13 +78,16 @@ class NewPlantActivity : AppCompatActivity() {
         }
 
         if (plant != null) {
-            val imgFile = File(plant.ImageUrl)
-            if (imgFile.exists()) {
-                path = plant.ImageUrl
-                val myBitmap = BitmapFactory.decodeFile(imgFile.absolutePath)
-                binding.ImgPlant.setImageBitmap(myBitmap)
+            if(plant.ImageUrl!=null){
+                val imgFile = File(plant.ImageUrl)
+                if (imgFile.exists()) {
+                    path = plant.ImageUrl
+                    val myBitmap = BitmapFactory.decodeFile(imgFile.absolutePath)
+                    binding.ImgPlant.setImageBitmap(myBitmap)
+                }
             }
-            binding.viewmodel = PlantItemViewModel(plant, null)
+            binding.viewmodel = PlantItemViewModel(plant)
+
 
         } else {
             //binding.btnRemove.isVisible = false
@@ -105,7 +112,7 @@ class NewPlantActivity : AppCompatActivity() {
                 val waterTime = binding.btnWaterAlarm.text.toString()
                 val sunTime = binding.btnSunAlarm.text.toString()
                 val item = Plant(name, description, waterInterval as Int, sunInterval as Int, waterTime, sunTime, path)
-                if (plant != null) {
+                if (plant != null && plant.name!="") {
                     item.plantId = plant.plantId
                     plantViewModel.updatePlant(item)
                 } else {

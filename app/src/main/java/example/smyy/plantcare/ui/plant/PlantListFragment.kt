@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.android.support.AndroidSupportInjection
@@ -28,6 +30,8 @@ class PlantListFragment : Fragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
+    @Inject
+    lateinit var plantAdapter: PlantAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentPlantListBinding.inflate(inflater, container, false)
@@ -44,15 +48,15 @@ class PlantListFragment : Fragment() {
     private fun subscribeUi(binding: FragmentPlantListBinding) {
         plantViewModel = ViewModelProviders.of(this, viewModelFactory).get(PlantViewModel::class.java)
         plantViewModel.getPlants().observe(viewLifecycleOwner, Observer { plantList ->
-            val adapter = PlantAdapter()
-            binding.rvPlants.adapter = adapter
-            plantList.let { adapter.setPlants(it) }
+            binding.rvPlants.adapter = plantAdapter
+            plantList.let { plantAdapter.setPlants(it,0) }
         })
     }
 
     private fun showAddPlantFragment() {
-        val intent = Intent(context , NewPlantActivity::class.java)
-        activity?.startActivity(intent)
+        val plant=Plant("","",0,0,"","")
+        val direction = PlantListFragmentDirections.actionPlantListFragmentToNewPlantActivity(plant)
+        findNavController().navigate(direction)
     }
 
     override fun onDestroyView() {
